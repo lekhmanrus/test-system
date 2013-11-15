@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
 
+app.use(express.favicon(__dirname + '/favicon.ico'));
 app.use('/css', express.static(__dirname + '/css'));
 app.use('/fonts', express.static(__dirname + '/fonts'));
 app.use('/img', express.static(__dirname + '/img'));

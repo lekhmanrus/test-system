@@ -3,7 +3,6 @@
   "version": "0.0.1",
   "author": "Ruslan Lekhman <https://github.com/lekhmanrus>",
   "description": "Application for testing students.",
-
   "contributors": [
     {
       "name": "Ruslan Lekhman",
@@ -14,22 +13,17 @@
       "url": "https://github.com/wishmaster2016"
     }
   ],
-
   "scripts": {
     "start": "node ./index.js"
   },
-
   "main": "./index.js",
-
   "repository": {
     "type": "git",
     "url": "https://github.com/lekhmanrus/test-system.git"
   },
-
   "dependencies" : {
     "express": "*",
     "bower": "*"
   },
-
   "license": "MIT"
 }

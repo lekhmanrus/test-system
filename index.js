@@ -19,12 +19,12 @@ app.use(function(req, res, next) {
 });
 
 app.get('/', function(req, res) {
-  res.write('huj');
+  res.write('some text');
   res.end();
 });
 
 app.get('/data', function(req, res) {
-  res.write('huj');
+  res.write('some text');
   res.end();
 });
 

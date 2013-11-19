@@ -24,7 +24,7 @@ app.get('/', function(req, res) {
 });
 
 app.get('/data', function(req, res) {
-  res.write('some text');
+  res.write('test');
   res.end();
 });
 

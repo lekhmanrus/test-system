@@ -33,19 +33,17 @@ app.get('/', function(req, res) {
   res.end();
 });
 
-var connect = function(q, callback) {
+var exec = function(q, callback) {
   this.query(q, function(err, result) {
     if(err) {
       console.error(err);
-      throw 'error running query!';
+      throw 'error exec query!';
     }
     callback(null, result.rows);
   });
 }
 
-app.get('/data', function(req, res) {
-  res.write('some text');
-  var client = new pg.Client();
+var query = function(q, callback) {
   client.connect(function(err) {
     if(err) {
       console.error('could not connect to postgres', err);
@@ -53,15 +51,23 @@ app.get('/data', function(req, res) {
     }
     async.waterfall([
       function(callback){
-        callback(null, "SELECT login FROM users WHERE id = 1");
+        callback(null, q);
       },
-      connect.bind(client)
+      exec.bind(client)
     ], function(err, result) {
-      console.log(result);
+      callback(result);
       client.end();
     })
   });
-  res.end();
+  
+}
+
+app.get('/data', function(req, res) {
+  var client = new pg.Client();
+  query("SELECT login FROM users WHERE id = 1", function(data) {
+    res.json(data);
+    //res.end();
+  });
 });
 
 app.use(express.static(__dirname + '/partials'));

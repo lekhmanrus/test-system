@@ -27,7 +27,9 @@
   },
 
   "dependencies" : {
+    "async": "*",
     "express": "*",
+    "pg": "*",
     "bower": "*"
   },
 

@@ -1,37 +1,31 @@
 {
-  "name": "test-system",
-  "version": "0.0.1",
-  "author": "Ruslan Lekhman <https://github.com/lekhmanrus>",
-  "description": "Application for testing students.",
-
-  "contributors": [
+  "name" : "test-system",
+  "version" : "0.0.1",
+  "author" : "Ruslan Lekhman <https://github.com/lekhmanrus>",
+  "description" : "Application for testing students.",
+  "contributors" : [
     {
-      "name": "Ruslan Lekhman",
-      "url": "https://github.com/lekhmanrus"
+      "name" : "Ruslan Lekhman",
+      "url" : "https://github.com/lekhmanrus"
     },
     {
-      "name": "Sergey Bliznyuk",
-      "url": "https://github.com/wishmaster2016"
+      "name" : "Sergey Bliznyuk",
+      "url" : "https://github.com/wishmaster2016"
     }
   ],
-
-  "scripts": {
-    "start": "node ./index.js"
+  "scripts" : {
+    "start" : "node ./index.js"
   },
-
   "main": "./index.js",
-
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/lekhmanrus/test-system.git"
+  "repository" : {
+    "type" : "git",
+    "url" : "https://github.com/lekhmanrus/test-system.git"
   },
-
   "dependencies" : {
     "async": "*",
     "express": "*",
     "pg": "*",
     "bower": "*"
   },
-
-  "license": "MIT"
+  "license" : "MIT"
 }

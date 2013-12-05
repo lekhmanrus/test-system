@@ -10,6 +10,7 @@ app.use('/fonts', express.static(__dirname + '/fonts'));
 app.use('/img', express.static(__dirname + '/img'));
 app.use('/js', express.static(__dirname + '/js'));
 app.use('/lib', express.static(__dirname + '/lib'));
+app.use('/locale', express.static(__dirname + '/locale'));
 
 app.get('/data', function(req, res) {
   query("SELECT login FROM users WHERE id = 1", function(data) {

@@ -1,15 +1,8 @@
-var pg = require('pg');
-var fs = require('fs');
-var async = require('async');
+'use strict';
+
+var query = require('./include/query.js');
 var express = require('express');
 var app = express();
-
-var config = JSON.parse(fs.readFileSync('config/config.json', { encoding: "utf-8" }));
-pg.defaults.port = '5432';
-pg.defaults.host = '/var/run/postgresql';
-pg.defaults.database = config.database;
-pg.defaults.user = config.unix.username;
-pg.defaults.password = config.unix.password;
 
 app.use(express.favicon(__dirname + '/favicon.ico'));
 app.use('/css', express.static(__dirname + '/css'));
@@ -18,9 +11,13 @@ app.use('/img', express.static(__dirname + '/img'));
 app.use('/js', express.static(__dirname + '/js'));
 app.use('/lib', express.static(__dirname + '/lib'));
 
+app.get('/data', function(req, res) {
+  query("SELECT login FROM users WHERE id = 1", function(data) {
+    res.json(data);
+  });
+});
+
 app.use(function(req, res, next) {
-  if(req.url.indexOf('/data') == 0)
-    return next();
   if(req.url == '/')
     req.url += 'index.html';
   if (req.url.indexOf('.') == -1)
@@ -28,47 +25,10 @@ app.use(function(req, res, next) {
     next();
 });
 
-app.get('/', function(req, res) {
+/*app.get('/', function(req, res) {
   res.write('some text');
   res.end();
-});
-
-var exec = function(q, callback) {
-  this.query(q, function(err, result) {
-    if(err) {
-      console.error(err);
-      throw 'error exec query!';
-    }
-    callback(null, result.rows);
-  });
-}
-
-var query = function(q, callback) {
-  client.connect(function(err) {
-    if(err) {
-      console.error('could not connect to postgres', err);
-      throw 'error connecting to server!';
-    }
-    async.waterfall([
-      function(callback){
-        callback(null, q);
-      },
-      exec.bind(client)
-    ], function(err, result) {
-      callback(result);
-      client.end();
-    })
-  });
-  
-}
-
-app.get('/data', function(req, res) {
-  var client = new pg.Client();
-  query("SELECT login FROM users WHERE id = 1", function(data) {
-    res.json(data);
-    //res.end();
-  });
-});
+});*/
 
 app.use(express.static(__dirname + '/partials'));
 

@@ -22,10 +22,10 @@
     "url" : "https://github.com/lekhmanrus/test-system.git"
   },
   "dependencies" : {
-    "async": "*",
-    "express": "*",
-    "pg": "*",
-    "bower": "*"
+    "async": "",
+    "express": "",
+    "pg": "",
+    "bower": ""
   },
   "license" : "MIT"
 }

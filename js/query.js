@@ -10,7 +10,6 @@ pg.defaults.host = '/var/run/postgresql';
 pg.defaults.database = config.database;
 pg.defaults.user = config.unix.username;
 pg.defaults.password = config.unix.password;
-var client = new pg.Client();
 
 var exec = function(q, callback) {
   this.query(q, function(err, result) {
@@ -23,6 +22,7 @@ var exec = function(q, callback) {
 }
 
 var query = function(q, callback) {
+  var client = new pg.Client();
   client.connect(function(err) {
     if(err) {
       console.error('Could not connect to postgres!', err);

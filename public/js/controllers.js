@@ -12,7 +12,8 @@ angular.module('test.controllers', []).
           console.log($scope.login);
           console.log($scope.password);
           console.log(data);
-          $scope.output = data;
+          if(data.length == 1)
+            $scope.output = data[0].name + " " + data[0].surname;
         });
       });
     }

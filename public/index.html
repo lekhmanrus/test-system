@@ -1,12 +1,45 @@
 <!DOCTYPE html>
 <html lang="ua" ng-app="test">
   <head>
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <title>Test system</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css" />
-    <link rel="stylesheet" href="css/bootstrap-theme.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/jumbotron-narrow.css" />
+    <link rel="stylesheet" type="text/css" href="css/logo.css" />
   </head>
-  <body ng-view></body>
+  <body>
+    <div class="container">
+      <div class="header">
+        <ul class="nav nav-pills pull-right">
+          <li class="active"><a href="#/">Home</a></li>
+          <li><a href="#/about">About</a></li>
+          <li><a href="#/contacts">Contact</a></li>
+        </ul>
+        <!--<h3 class="text-muted">Test system</h3>-->
+        <h2 class="cs-text">
+          <span>T</span>
+          <span>e</span>
+          <span>s</span>
+          <span>t</span>
+          <span>-</span>
+          <span>s</span>
+          <span>y</span>
+          <span>s</span>
+          <span>t</span>
+          <span>e</span>
+          <span>m</span>
+          <span></span>
+        </h2>
+        <!--<p l10n-text="person.str"></p>
+        <p ng-bind="output"></p>-->
+      </div>
+      <div ng-view></div>
+      <div class="footer">
+        <p>© DHARMA 2013</p>
+      </div>
+    </div>
+  </body>
   <script type="text/javascript" src="lib/jquery-2.0.3.min.js"></script>
   <script type="text/javascript" src="lib/angular/angular.min.js"></script>
   <script type="text/javascript" src="lib/angular/angular-route.js"></script>

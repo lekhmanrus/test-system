@@ -1,29 +1,40 @@
 'use strict';
 
 angular.module('test.controllers', [])
+  .controller('mainCtrl', ['$scope', 'l10n', '$route', '$location', function($scope, l10n, $route, $location) {
+    l10n.setLocale('uk-UA');
+    $scope.page = null;
+    $scope.$on('$routeChangeSuccess', function() {
+      $scope.page = $location.path();
+    });
+    $scope.goHome = function() {
+      $location.path('/');
+    }
+  }])
   .controller('loginCtrl', ['$scope', '$timeout', 'l10n', function($scope, $timeout, l10n) {
     l10n.setLocale('uk-UA');
-    $scope.login = "";
-    $scope.password = "";
+    $scope.login = sessionStorage['login-data-username'];
+    $scope.password = sessionStorage['login-data-password'];
     $scope.output = "test";
-    $scope.a = function() {
+    $scope.signIn = function() {
       $.get("/login/" + $scope.login + "/" + $scope.password, function(data) {
+        sessionStorage['login-data-username'] = $scope.login;
+        sessionStorage['login-data-password'] = $scope.password;
         $timeout(function() {
-          console.log($scope.login);
-          console.log($scope.password);
-          console.log(data);
           if(data.length == 1)
             $scope.output = data[0].name + " " + data[0].surname;
         });
       });
     }
-    /*$scope.singleModel = 1;
-    $scope.radioModel = 'Middle';
-    $scope.checkModel = {
-      left: false,
-      middle: true,
-      right: false
-    };*/
+  }])
+  .controller('registerCtrl', ['$scope', 'l10n', function($scope, l10n) {
+    $scope.login = "";
+    $scope.password = "";
+    $scope.confirm = "";
+    $scope.email = "";
+    $scope.name = "";
+    $scope.surname = "";
+    $scope.patronymic = "";
   }])
   .controller('aboutCtrl', ['$scope', 'l10n', function($scope, l10n) {
 

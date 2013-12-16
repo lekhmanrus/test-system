@@ -1,12 +1,4 @@
-*, *:before, *:after {
-    -moz-box-sizing: border-box;
-}
-
 body {
   color: #333;
   background-color: #fff;
-}
-
-.col-lg-6 p {
-  margin: 0px 0px 0px !important;
 }

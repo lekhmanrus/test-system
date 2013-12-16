@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('test.controllers', []).
-  controller('loginCtrl', ['$scope', '$timeout', 'l10n', function($scope, $timeout, l10n) {
+angular.module('test.controllers', [])
+  .controller('loginCtrl', ['$scope', '$timeout', 'l10n', function($scope, $timeout, l10n) {
     l10n.setLocale('uk-UA');
     $scope.login = "";
     $scope.password = "";
@@ -24,4 +24,13 @@ angular.module('test.controllers', []).
       middle: true,
       right: false
     };*/
+  }])
+  .controller('aboutCtrl', ['$scope', 'l10n', function($scope, l10n) {
+
+  }])
+  .controller('contactCtrl', ['$scope', 'l10n', function($scope, l10n) {
+
+  }])
+  .controller('404Ctrl', ['$scope', 'l10n', function($scope, l10n) {
+
   }]);

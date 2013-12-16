@@ -7,17 +7,18 @@
     <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css" />
     <link rel="stylesheet" type="text/css" href="css/jumbotron-narrow.css" />
     <link rel="stylesheet" type="text/css" href="css/logo.css" />
+    <link rel="stylesheet" type="text/css" href="css/app.css" />
   </head>
-  <body>
+  <body ng-controller="mainCtrl">
     <div class="container">
       <div class="header">
         <ul class="nav nav-pills pull-right">
-          <li class="active"><a href="#/">Home</a></li>
-          <li><a href="#/about">About</a></li>
-          <li><a href="#/contact">Contact</a></li>
+          <li ng-class="{'active': page == '/'}"><a href="#/">Home</a></li>
+          <li ng-class="{'active': page == '/about'}"><a href="#/about">About</a></li>
+          <li ng-class="{'active': page == '/contact'}"><a href="#/contact">Contact</a></li>
         </ul>
         <!--<h3 class="text-muted">Test system</h3>-->
-        <h2 class="cs-text">
+        <h2 class="cs-text" ng-click="goHome()">
           <span>T</span>
           <span>e</span>
           <span>s</span>

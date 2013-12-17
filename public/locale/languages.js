@@ -2,8 +2,9 @@ angular.module('test.languages', ['l10n', 'l10n-tools']).config(['l10nProvider',
   l10n.add('uk-UA', {
     login: {
       auth: 'Будь ласка, авторизуйтесь у системі',
-      log: 'Логін',
+      signin: 'Логін',
       pass: 'Пароль',
+      register: 'Реєстрація',
       'btn-login': 'Вхід',
       'btn-home': 'Головна',
       'btn-about': 'Про нас',
@@ -20,13 +21,30 @@ angular.module('test.languages', ['l10n', 'l10n-tools']).config(['l10nProvider',
       text5: 'Програмний продукт не потребує для своєї роботи великої кількості апаратних ресурсів, що дозволяє використовувати його навіть на застарілому обладнанні.',
       sub6: 'Ліцензоване ПЗ',
       text6: 'Користувач отримує програмне забезпечення разом із ліцензією, яка надає йому право використовувати програмний продукт за умови виконання положень ліцензування.'
+    },
+    registration:  {
+      signin: 'Логін',
+      pass: 'Пароль',
+      'pass-confirm': 'Підтвердження',
+      name: 'І’мя',
+      surname: 'Прізвище',
+      patronymic: 'По батькові',
+      'e-mail': 'E-mail',
+      'signin-help': 'І’мя користувача повинно містити не менш ніж 6 символів',
+      'pass-help': 'Пароль повинен містити не менш ніж 6 символів',
+      'pass-confirm-help': 'Введіть пароль ще раз',
+      'name-help': 'І’мя',
+      'surname-help': 'Прізвище',
+      'patronymic-help': 'По батькові',
+      'e-mail-help': 'E-mail адреса'
     }
   });
   l10n.add('ru-RU', {
     login: {
       auth: 'Пожалуйста, авторизируйтесь в системе',
-      log: 'Логин',
+      signin: 'Логин',
       pass: 'Пароль',
+      register: 'Регистрация',
       'btn-login': 'Войти',
       'btn-home': 'Главная',
       'btn-about': 'О нас',
@@ -43,18 +61,35 @@ angular.module('test.languages', ['l10n', 'l10n-tools']).config(['l10nProvider',
       text5: 'Программный продукт не требует для своей работы большого количества аппаратных ресурсов, что позволяет использовать его даже на устаревшем оборудовании.',
       sub6: 'Лицензионное ПО',
       text6: 'Пользователь получает программное обеспечение вместе с лицензией, которая дает ему право использовать программный продукт при условии выполнения положений лицензирования.'
+    },
+    registration:  {
+      signin: 'Логин',
+      pass: 'Пароль',
+      'pass-confirm': 'Подтверждение',
+      name: 'Имя',
+      surname: 'Фамилия',
+      patronymic: 'Отчество',
+      'e-mail': 'E-mail',
+      'signin-help': 'Имя пользователя должно содержать не меньше 6 символов',
+      'pass-help': 'Пароль должен содержать не менее 6 символов',
+      'pass-confirm-help': 'Введите пароль еще раз',
+      'name-help': 'Имя',
+      'surname-help': 'Фамилия',
+      'patronymic-help': 'Отчество',
+      'e-mail-help': 'E-mail адресс'
     }
   });
   l10n.add('en-US', {
     login: {
       auth: 'Please sign in',
-      log: 'Login',
+      signin: 'Login',
       pass: 'Password',
+      register: 'Registration',
       'btn-login': 'Sign in',
       'btn-about': 'About',
       'btn-contact': 'Contacts',
       sub1: 'Тest system',
-      text1: 'This is a new testing ыныеуь that meets all the requirements of users.',
+      text1: 'This is a new testing that meets all the requirements of users.',
       sub2: 'Reliability',
       text2: 'Now you really can not worry about your data, because the application has a high degree of reliability and fault tolerance.',
       sub3: 'Security',
@@ -65,6 +100,22 @@ angular.module('test.languages', ['l10n', 'l10n-tools']).config(['l10nProvider',
       text5: 'The software does not need to have been running a lot of hardware resources, it can be used even on older hardware.',
       sub6: 'License software',
       text6: 'The user receives the software with a license that allows him to use the software subject to the provisions of the license.'
+    },
+    registration:  {
+      signin: 'Login',
+      pass: 'Password',
+      'pass-confirm': 'Confirm password',
+      name: 'Name',
+      surname: 'Surname',
+      patronymic: 'Patronymic',
+      'e-mail': 'E-mail',
+      'signin-help': 'Username must be 6 or more characters',
+      'pass-help': 'Password must be 6 or more characters',
+      'pass-confirm-help': 'Retype password',
+      'name-help': 'First name',
+      'surname-help': 'Second name',
+      'patronymic-help': 'Patronymic',
+      'e-mail-help': 'E-mail address'
     }
   });
 }]);

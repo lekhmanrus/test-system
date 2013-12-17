@@ -28,6 +28,7 @@ angular.module('test.controllers', [])
     }
   }])
   .controller('registerCtrl', ['$scope', 'l10n', function($scope, l10n) {
+    l10n.setLocale('uk-UA');
     $scope.login = "";
     $scope.password = "";
     $scope.confirm = "";

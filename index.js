@@ -20,6 +20,18 @@ app.get('/login/:login/:password', function(req, res) {
   });
 });
 
+app.get('/register/:login/:password/:email/:name/:surname/:patronymic', function(req, res) {
+  query("SELECT * FROM users WHERE login = '" + req.params.login + "' AND password = '" + req.params.password + "'", function(data) {
+    if(data.length != 0) {
+      res.json({error : 1});
+      return;
+    }
+    query("INSERT INTO users (login, password, email, name, surname, patronymic) VALUES ('" + req.params.login + "', '" + req.params.password + "', '" + req.params.email + "', '" + req.params.name + "', '" + req.params.surname + "', '" + req.params.patronymic + "');", function(data) {
+      res.json({success : 1});
+    });
+  });
+});
+
 app.use(express.static(__dirname + '/public'));
 
 app.listen(process.env.PORT || 8888);

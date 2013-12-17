@@ -20,7 +20,6 @@ angular.module('test.languages', ['l10n', 'l10n-tools']).config(['l10nProvider',
       text5: 'Програмний продукт не потребує для своєї роботи великої кількості апаратних ресурсів, що дозволяє використовувати його навіть на застарілому обладнанні.',
       sub6: 'Ліцензоване ПЗ',
       text6: 'Користувач отримує програмне забезпечення разом із ліцензією, яка надає йому право використовувати програмний продукт за умови виконання положень ліцензування.'
-
     }
   });
   l10n.add('ru-RU', {
@@ -32,7 +31,7 @@ angular.module('test.languages', ['l10n', 'l10n-tools']).config(['l10nProvider',
       'btn-home': 'Главная',
       'btn-about': 'О нас',
       'btn-contact': 'Контакти',
-       sub1: 'Тest system',
+      sub1: 'Тest system',
       text1: 'Это новая система тестирования знаний которая отвечает всем требованиям пользователей.',
       sub2: 'Надежность',
       text2: 'Теперь вы действительно можете не волноваться за свои данные, ведь приложение имеет большую степень надежности и отказоустойчивости.',
@@ -54,7 +53,7 @@ angular.module('test.languages', ['l10n', 'l10n-tools']).config(['l10nProvider',
       'btn-login': 'Sign in',
       'btn-about': 'About',
       'btn-contact': 'Contacts',
-       sub1: 'Тest system',
+      sub1: 'Тest system',
       text1: 'This is a new testing ыныеуь that meets all the requirements of users.',
       sub2: 'Reliability',
       text2: 'Now you really can not worry about your data, because the application has a high degree of reliability and fault tolerance.',
@@ -66,7 +65,6 @@ angular.module('test.languages', ['l10n', 'l10n-tools']).config(['l10nProvider',
       text5: 'The software does not need to have been running a lot of hardware resources, it can be used even on older hardware.',
       sub6: 'License software',
       text6: 'The user receives the software with a license that allows him to use the software subject to the provisions of the license.'
-      
     }
   });
 }]);

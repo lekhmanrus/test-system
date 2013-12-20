@@ -20,7 +20,7 @@ Date: 2013-12-10 23:54:32
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."answers";
 CREATE TABLE "public"."answers" (
-"id" int4 NOT NULL,
+"id" SERIAL NOT NULL,
 "question_id" int4,
 "title" text COLLATE "default",
 "points" int4,
@@ -35,7 +35,7 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."categories";
 CREATE TABLE "public"."categories" (
-"id" int4 NOT NULL,
+"id" SERIAL NOT NULL,
 "title" varchar(255) COLLATE "default",
 "order" int4
 )
@@ -48,7 +48,7 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."questions";
 CREATE TABLE "public"."questions" (
-"id" int4 NOT NULL,
+"id" SERIAL NOT NULL,
 "test_id" int4,
 "title" text COLLATE "default",
 "order" int4
@@ -62,7 +62,7 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."results";
 CREATE TABLE "public"."results" (
-"id" int4 NOT NULL,
+"id" SERIAL NOT NULL,
 "user_id" int4,
 "test_id" int4,
 "points" int4
@@ -76,7 +76,7 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."subjects";
 CREATE TABLE "public"."subjects" (
-"id" int4 NOT NULL,
+"id" SERIAL NOT NULL,
 "category_id" int4,
 "title" varchar(255) COLLATE "default",
 "order" int4
@@ -90,7 +90,7 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."tests";
 CREATE TABLE "public"."tests" (
-"id" int4 NOT NULL,
+"id" SERIAL NOT NULL,
 "subject_id" int4 NOT NULL,
 "title" varchar(255) COLLATE "default",
 "description" varchar(255) COLLATE "default",
@@ -107,14 +107,14 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."users";
 CREATE TABLE "public"."users" (
-"id" int4 NOT NULL,
+"id" int4 DEFAULT nextval('users_id_seq'::regclass) NOT NULL,
 "login" varchar(255) COLLATE "default" NOT NULL,
 "password" varchar(255) COLLATE "default" NOT NULL,
-"name" varchar(255) COLLATE "default",
-"surname" varchar(255) COLLATE "default",
-"patronymic" varchar(255) COLLATE "default",
-"rights" int2 NOT NULL,
-"email" varchar(255) COLLATE "default"
+"name" varchar(255) COLLATE "default" DEFAULT NULL::character varying,
+"surname" varchar(255) COLLATE "default" DEFAULT NULL::character varying,
+"patronymic" varchar(255) COLLATE "default" DEFAULT NULL::character varying,
+"rights" int2 DEFAULT 1 NOT NULL,
+"email" varchar(255) COLLATE "default" DEFAULT NULL::character varying
 )
 WITH (OIDS=FALSE)
 

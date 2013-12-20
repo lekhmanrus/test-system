@@ -1,52 +1,52 @@
 <title>Test system</title>
 <link rel="stylesheet" type="text/css" href="css/signin.css" />
 <div class="jumbotron">
-  <form class="form-horizontal" role="form">
+  <form class="form-horizontal" role="form" action="#">
     <div class="form-group">
-      <label for="inputEmail3" class="col-sm-2 control-label" l10n-text="registration.signin"></label>
+      <label for="input-login" class="col-sm-2 control-label" l10n-text="registration.signin"></label>
       <div class="col-sm-10">
-        <input type="text" ng-model="login" class="form-control" id="inputEmail3" l10n-placeholder="registration.signin-help">
+        <input type="text" ng-model="login" class="form-control" id="input-login" l10n-placeholder="registration.signin-help" popover-placement="right" popover-title="" popover="" required autofocus />
       </div>
     </div>
     <div class="form-group">
-      <label for="inputPassword3" class="col-sm-2 control-label" l10n-text="registration.pass"></label>
+      <label for="input-password" class="col-sm-2 control-label" l10n-text="registration.pass"></label>
       <div class="col-sm-10">
-        <input type="password" ng-model="password" class="form-control" id="inputPassword3" l10n-placeholder="registration.pass-help">
+        <input type="password" ng-model="password" class="form-control" id="input-password" l10n-placeholder="registration.pass-help" required />
       </div>
     </div>
     <div class="form-group">
-      <label for="inputPassword3" class="col-sm-2 control-label" l10n-text="registration.pass-confirm"></label>
+      <label for="input-confirm" class="col-sm-2 control-label" l10n-text="registration.pass-confirm"></label>
       <div class="col-sm-10">
-        <input type="password" ng-model="confirm" class="form-control" id="inputPassword3" l10n-placeholder="registration.pass-confirm-help">
+        <input type="password" ng-model="confirm" class="form-control" id="input-confirm" l10n-placeholder="registration.pass-confirm-help" required />
       </div>
     </div>
     <div class="form-group">
-      <label for="inputPassword3" class="col-sm-2 control-label" l10n-text="registration.e-mail"></label>
+      <label for="input-email" class="col-sm-2 control-label" l10n-text="registration.e-mail"></label>
       <div class="col-sm-10">
-        <input type="email" ng-model="email" class="form-control" id="inputPassword3" l10n-placeholder="registration.e-mail-help">
+        <input type="email" ng-model="email" class="form-control" id="input-email" l10n-placeholder="registration.e-mail-help" required />
       </div>
     </div>
     <div class="form-group">
-      <label for="inputEmail3" class="col-sm-2 control-label">Name</label>
+      <label for="input-name" class="col-sm-2 control-label">Name</label>
       <div class="col-sm-10">
-        <input type="text" ng-model="name" class="form-control" id="inputEmail3" placeholder="First name">
+        <input type="text" ng-model="name" class="form-control" id="input-name" placeholder="First name" required />
       </div>
     </div>
     <div class="form-group">
-      <label for="inputEmail3" class="col-sm-2 control-label">Surname</label>
+      <label for="input-surname" class="col-sm-2 control-label">Surname</label>
       <div class="col-sm-10">
-        <input type="text" ng-model="surname" class="form-control" id="inputEmail3" placeholder="Second name">
+        <input type="text" ng-model="surname" class="form-control" id="input-surname" placeholder="Second name" required />
       </div>
     </div>
     <div class="form-group">
-      <label for="inputEmail3" class="col-sm-2 control-label">Patronymic</label>
+      <label for="input-patronymic" class="col-sm-2 control-label">Patronymic</label>
       <div class="col-sm-10">
-        <input type="text" ng-model="patronymic" class="form-control" id="inputEmail3" placeholder="Patronymic">
+        <input type="text" ng-model="patronymic" class="form-control" id="input-patronymic" placeholder="Patronymic" required />
       </div>
     </div>
     <div class="form-group">
       <div class="col-sm-offset-2 col-sm-10">
-        <button type="button" class="btn btn-lg btn-info btn-block" ng-click="register()">Register</button>
+        <button type="submit" class="btn btn-lg btn-info btn-block" ng-click="register()">Register</button>
       </div>
     </div>
   </form>

@@ -49,12 +49,19 @@ angular.module('test.controllers', [])
 
         return;
       }
+      if($scope.email == undefined || !$scope.email) {
+
+        return;
+      }
       $.get("/register/" + $scope.login + "/" + $scope.password + "/" + $scope.email + "/" + $scope.name + "/" + $scope.surname + "/" + $scope.patronymic, function(data) {
         sessionStorage['login-data-username'] = $scope.login;
         sessionStorage['login-data-password'] = $scope.password;
         $timeout(function() {
-          if(data.length == 1)
-            $scope.output = data[0].name + " " + data[0].surname;
+          if(data.length == 1) {
+            alert(data[0].name + " " + data[0].surname);
+            sessionStorage['login-data-username'] = $scope.login;
+            sessionStorage['login-data-password'] = $scope.password;
+          }
         });
       });
     }

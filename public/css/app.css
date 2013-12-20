@@ -23,3 +23,16 @@ body {
   font-size: 15px;
   font-weight: normal;
 }
+
+h2#logo, h2#logo span {
+  cursor: pointer;
+}
+
+.container .jumbotron {
+  padding-right: 30px !important!;
+  padding-left: 30px !important!;
+}
+
+.jumbotron .popover {
+  font-size: 14px;
+}

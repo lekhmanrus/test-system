@@ -6,7 +6,7 @@ var async = require('async');
 
 var config = JSON.parse(fs.readFileSync('config/config.json', { encoding: "utf-8" }));
 pg.defaults.port = '5432';
-pg.defaults.host = '/var/run/postgresql';
+pg.defaults.host = 'localhost';
 pg.defaults.database = config.database;
 pg.defaults.user = config.unix.username;
 pg.defaults.password = config.unix.password;

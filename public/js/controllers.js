@@ -18,16 +18,17 @@ angular.module('test.controllers', [])
     $scope.output = "test";
     $scope.signIn = function() {
       $.get("/login/" + $scope.login + "/" + $scope.password, function(data) {
-        sessionStorage['login-data-username'] = $scope.login;
-        sessionStorage['login-data-password'] = $scope.password;
         $timeout(function() {
-          if(data.length == 1)
+          if(data.length == 1) {
+            sessionStorage['login-data-username'] = $scope.login;
+            sessionStorage['login-data-password'] = $scope.password;
             $scope.output = data[0].name + " " + data[0].surname;
+          }
         });
       });
     }
   }])
-  .controller('registerCtrl', ['$scope', 'l10n', function($scope, l10n) {
+  .controller('registerCtrl', ['$scope', 'l10n', '$http', function($scope, l10n, $http) {
     l10n.setLocale('uk-UA');
     $scope.login = "";
     $scope.password = "";
@@ -53,7 +54,16 @@ angular.module('test.controllers', [])
 
         return;
       }
-      $.get("/register/" + $scope.login + "/" + $scope.password + "/" + $scope.email + "/" + $scope.name + "/" + $scope.surname + "/" + $scope.patronymic, function(data) {
+      var params = {
+        login : $scope.login, 
+        password : $scope.password,
+        email : $scope.email,
+        name : $scope.name,
+        surname : $scope.surname,
+        patronymic : $scope.patronymic
+      };
+      //$.post("/register/" + $scope.login + "/" + $scope.password + "/" + $scope.email + "/" + $scope.name + "/" + $scope.surname + "/" + $scope.patronymic, function(data) {
+      $http.post("/register", params, function(data) {
         sessionStorage['login-data-username'] = $scope.login;
         sessionStorage['login-data-password'] = $scope.password;
         $timeout(function() {

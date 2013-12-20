@@ -1,7 +1,7 @@
 {
   "database" : "test-system",
   "unix" : {
-    "username" : "postgres",
+    "username" : "test-system",
     "password" : "1"
   }
 }

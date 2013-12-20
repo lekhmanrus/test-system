@@ -107,7 +107,7 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."users";
 CREATE TABLE "public"."users" (
-"id" int4 DEFAULT nextval('users_id_seq'::regclass) NOT NULL,
+"id" SERIAL NOT NULL,
 "login" varchar(255) COLLATE "default" NOT NULL,
 "password" varchar(255) COLLATE "default" NOT NULL,
 "name" varchar(255) COLLATE "default" DEFAULT NULL::character varying,

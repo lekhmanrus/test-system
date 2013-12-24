@@ -3,13 +3,24 @@
 angular.module('test.controllers', [])
   .controller('mainCtrl', ['$scope', 'l10n', '$route', '$location', function($scope, l10n, $route, $location) {
     l10n.setLocale('uk-UA');
+    $scope.loginFlag = false;
+    if(sessionStorage['login-data-username'].length > 0 && sessionStorage['login-data-password'].length > 0)
+      $scope.loginFlag = true;
     $scope.page = null;
     $scope.$on('$routeChangeSuccess', function() {
       $scope.page = $location.path();
     });
+    $scope.exit = function() {
+      sessionStorage['login-data-username'] = '';
+      sessionStorage['login-data-password'] = '';
+      $scope.goHome();
+    }
     $scope.goHome = function() {
       $location.path('/');
     }
+  }])
+  .controller('indexCtrl', ['$scope', '$timeout', 'l10n', function($scope, $timeout, l10n) {
+    l10n.setLocale('uk-UA');
   }])
   .controller('loginCtrl', ['$scope', '$timeout', 'l10n', function($scope, $timeout, l10n) {
     l10n.setLocale('uk-UA');
@@ -77,11 +88,11 @@ angular.module('test.controllers', [])
     }
   }])
   .controller('aboutCtrl', ['$scope', 'l10n', function($scope, l10n) {
-
+    l10n.setLocale('uk-UA');
   }])
   .controller('contactCtrl', ['$scope', 'l10n', function($scope, l10n) {
-
+    l10n.setLocale('uk-UA');
   }])
   .controller('404Ctrl', ['$scope', 'l10n', function($scope, l10n) {
-
+    l10n.setLocale('uk-UA');
   }]);

@@ -38,6 +38,11 @@ angular.module('test.languages', ['l10n', 'l10n-tools']).config(['l10nProvider',
       'patronymic-help': 'По батькові',
       'e-mail-help': 'E-mail адреса',
       register: 'Зареєструватись'
+    },
+    about:  {
+      'header-big': 'Про',
+      'header-small': 'нас',
+      info: ''
     }
   });
   l10n.add('ru-RU', {
@@ -79,6 +84,11 @@ angular.module('test.languages', ['l10n', 'l10n-tools']).config(['l10nProvider',
       'patronymic-help': 'Отчество',
       'e-mail-help': 'E-mail адресс',
       register: 'Зарегистрироваться'
+    },
+    about:  {
+      'header-big': 'О',
+      'header-small': 'нас',
+      info: ''
     }
   });
   l10n.add('en-US', {
@@ -119,6 +129,11 @@ angular.module('test.languages', ['l10n', 'l10n-tools']).config(['l10nProvider',
       'patronymic-help': 'Patronymic',
       'e-mail-help': 'E-mail address',
       register: 'Register'
+    },
+    about:  {
+      'header-big': 'About',
+      'header-small': 'us',
+      info: ''
     }
   });
 }]);

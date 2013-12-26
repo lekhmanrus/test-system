@@ -1,19 +1,20 @@
 'use strict';
 
 angular.module('test.controllers', [])
-  .controller('mainCtrl', ['$scope', 'l10n', '$route', '$location', function($scope, l10n, $route, $location) {
+  .controller('mainCtrl', ['$scope', 'l10n', '$route', '$location', '$rootScope', function($scope, l10n, $route, $location, $rootScope) {
     l10n.setLocale('uk-UA');
     $scope.loginFlag = false;
-    if(sessionStorage['login-data-username'].length > 0 && sessionStorage['login-data-password'].length > 0)
+    $rootScope = 'trah';
+    if(sessionStorage['login-data-username'] != undefined && sessionStorage['login-data-username'].length > 0 && sessionStorage['login-data-password'] != undefined && sessionStorage['login-data-password'].length > 0)
       $scope.loginFlag = true;
     $scope.page = null;
     $scope.$on('$routeChangeSuccess', function() {
       $scope.page = $location.path();
     });
     $scope.exit = function() {
-      sessionStorage['login-data-username'] = '';
-      sessionStorage['login-data-password'] = '';
-      $scope.goHome();
+      delete sessionStorage['login-data-username'];
+      delete sessionStorage['login-data-password'];
+      location.reload();
     }
     $scope.goHome = function() {
       $location.path('/');
@@ -34,6 +35,7 @@ angular.module('test.controllers', [])
             sessionStorage['login-data-username'] = $scope.login;
             sessionStorage['login-data-password'] = $scope.password;
             $scope.output = data[0].name + " " + data[0].surname;
+            location.reload();
           }
         });
       });

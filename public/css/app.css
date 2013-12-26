@@ -6,10 +6,10 @@ body {
   color: #333;
   background-color: #fff;
 }
-/*
-.col-lg-6 p {
-  margin: 0px 0px 0px !important;
-}*/
+
+.container-max-width {
+  max-width: 100%;
+}
 
 .marketing {
   margin: 0 0;

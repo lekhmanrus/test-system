@@ -10,7 +10,7 @@
     <link rel="stylesheet" type="text/css" href="css/app.css" />
   </head>
   <body ng-controller="mainCtrl">
-    <div class="container">
+    <div class="container" ng-class="{'container-max-width': loginFlag}">
       <div class="header">
         <ul class="nav nav-pills pull-right">
           <li ng-class="{'active': page == '/'}"><a href="#/" l10n-text="login.btn-home"></a></li>

@@ -23,14 +23,12 @@ app.get('/login/:login/:password', function(req, res) {
 });
 
 app.post('/register', function(req, res) {
-  query("SELECT * FROM users WHERE login = '" + req.params.login + "' AND password = '" + req.params.password + "'", function(data) {
+  query("SELECT * FROM users WHERE login = '" + req.body.login + "' AND password = '" + req.body.password + "'", function(data) {
     if(data.length != 0) {
       res.json({error : 1});
       return;
     }
-    console.log("INSERT INTO users (login, password, email, name, surname, patronymic) VALUES ('" + req.params.login + "', '" + req.params.password + "', '" + req.params.email + "', '" + req.params.name + "', '" + req.params.surname + "', '" + req.params.patronymic + "');");
-
-    query("INSERT INTO users (login, password, email, name, surname, patronymic) VALUES ('" + req.params.login + "', '" + req.params.password + "', '" + req.params.email + "', '" + req.params.name + "', '" + req.params.surname + "', '" + req.params.patronymic + "');", function(data) {
+    query("INSERT INTO users (login, password, email, name, surname, patronymic) VALUES ('" + req.body.login + "', '" + req.body.password + "', '" + req.body.email + "', '" + req.body.name + "', '" + req.body.surname + "', '" + req.body.patronymic + "');", function(data) {
       res.json({success : 1});
     });
   });

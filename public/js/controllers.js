@@ -75,17 +75,17 @@ angular.module('test.controllers', [])
         surname : $scope.surname,
         patronymic : $scope.patronymic
       };
-      //$.post("/register/" + $scope.login + "/" + $scope.password + "/" + $scope.email + "/" + $scope.name + "/" + $scope.surname + "/" + $scope.patronymic, function(data) {
-      $http.post("/register", params, function(data) {
-        sessionStorage['login-data-username'] = $scope.login;
-        sessionStorage['login-data-password'] = $scope.password;
-        $timeout(function() {
-          if(data.length == 1) {
-            alert(data[0].name + " " + data[0].surname);
-            sessionStorage['login-data-username'] = $scope.login;
-            sessionStorage['login-data-password'] = $scope.password;
-          }
-        });
+      $http.post("/register", params)
+        .then(function(data) {
+        if(data.length == 1) {
+          alert(data[0].name + " " + data[0].surname);
+          sessionStorage['login-data-username'] = $scope.login;
+          sessionStorage['login-data-password'] = $scope.password;
+          window.location.reload();
+        };
+      },
+      function() {
+        alert("Error.");
       });
     }
   }])

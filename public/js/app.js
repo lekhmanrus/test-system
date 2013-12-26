@@ -10,5 +10,6 @@ angular.module('test', ['ngRoute', 'test.filters', 'test.services', 'test.direct
                   .otherwise({redirectTo: '/404'});
 
     if(sessionStorage['login-data-username'] != undefined && sessionStorage['login-data-username'].length > 0 && sessionStorage['login-data-password'] != undefined && sessionStorage['login-data-password'].length > 0)
-      $routeProvider.when('/', {templateUrl: 'partials/index.html', controller: 'indexCtrl'});
+      $routeProvider.when('/', {templateUrl: 'partials/index.html', controller: 'indexCtrl'})
+                    .when('/register', {templateUrl: 'partials/index.html', controller: 'indexCtrl'});
   }]);

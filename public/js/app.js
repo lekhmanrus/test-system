@@ -12,5 +12,6 @@ angular.module('test', ['ngRoute', 'test.filters', 'test.services', 'test.direct
     var user = JSON.parse(sessionStorage['user'] || '{}')
     if(user && user.id > 0)
       $routeProvider.when('/', {templateUrl: 'partials/categories.html', controller: 'categoriesCtrl'})
-                    .when('/register', {templateUrl: 'partials/categories.html', controller: 'categoriesCtrl'});
+                    .when('/register', {templateUrl: 'partials/categories.html', controller: 'categoriesCtrl'})
+                    .when('/category/:category', {templateUrl: 'partials/subcategories.html', controller: 'subcategoriesCtrl'});
   }]);

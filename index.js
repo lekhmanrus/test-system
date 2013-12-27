@@ -10,7 +10,17 @@ app.use(express.json())
     res.sendfile(__dirname + '/public/index.html');
   })
   .get('/categories', function(req, res) {
-    query('SELECT * FROM "categories" ORDER BY "order"', function(data) {
+    query('SELECT * FROM "categories" ORDER BY "order";', function(data) {
+      res.json({data : data});
+    });
+  })
+  .get('/category/:category', function(req, res) {
+    query('SELECT * FROM "categories" WHERE "id" = ' + req.params.category + ' LIMIT 1;', function(data) {
+      res.json({data : data[0]});
+    });
+  })
+  .get('/subcategories/:category', function(req, res) {
+    query('SELECT * FROM "subcategories" WHERE "category_id" = ' + req.params.category + ' ORDER BY "order";', function(data) {
       res.json({data : data});
     });
   })

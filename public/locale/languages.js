@@ -1,14 +1,20 @@
 angular.module('test.languages', ['l10n', 'l10n-tools']).config(['l10nProvider', function(l10n){
   l10n.add('uk-UA', {
+    main: {
+      'btn-home': 'Головна',
+      'btn-about': 'Про нас',
+      'btn-contact': 'Контакти',
+      ua: 'Українська',
+      ru: 'Російська',
+      us: 'Англійська',
+      signout: 'Вихід'
+    },
     login: {
       auth: 'Будь ласка, авторизуйтесь у системі',
       signin: 'Логін',
       pass: 'Пароль',
       register: 'Реєстрація',
       'btn-login': 'Вхід',
-      'btn-home': 'Головна',
-      'btn-about': 'Про нас',
-      'btn-contact': 'Контакти',
       sub1: 'Тest system',
       text1: 'Це нова система тестування знань яка відповідає усім вимогам користувачів.',
       sub2: 'Надійність',
@@ -46,15 +52,21 @@ angular.module('test.languages', ['l10n', 'l10n-tools']).config(['l10nProvider',
     }
   });
   l10n.add('ru-RU', {
+    main: {
+      'btn-home': 'Главная',
+      'btn-about': 'О нас',
+      'btn-contact': 'Контакты',
+      ua: 'Украинский',
+      ru: 'Русский',
+      us: 'Английский',
+      signout: 'Выход'
+    },
     login: {
       auth: 'Пожалуйста, авторизируйтесь в системе',
       signin: 'Логин',
       pass: 'Пароль',
       register: 'Регистрация',
       'btn-login': 'Войти',
-      'btn-home': 'Главная',
-      'btn-about': 'О нас',
-      'btn-contact': 'Контакти',
       sub1: 'Тest system',
       text1: 'Это новая система тестирования знаний которая отвечает всем требованиям пользователей.',
       sub2: 'Надежность',
@@ -92,15 +104,21 @@ angular.module('test.languages', ['l10n', 'l10n-tools']).config(['l10nProvider',
     }
   });
   l10n.add('en-US', {
+    main: {
+      'btn-home': 'Home',
+      'btn-about': 'About',
+      'btn-contact': 'Contacts',
+      ua: 'Ukrainian',
+      ru: 'Russian',
+      us: 'American',
+      signout: 'Logout'
+    },
     login: {
       auth: 'Please sign in',
       signin: 'Login',
       pass: 'Password',
       register: 'Registration',
       'btn-login': 'Sign in',
-      'btn-home': 'Home',
-      'btn-about': 'About',
-      'btn-contact': 'Contacts',
       sub1: 'Тest system',
       text1: 'This is a new testing that meets all the requirements of users.',
       sub2: 'Reliability',

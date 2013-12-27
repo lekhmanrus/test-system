@@ -130,6 +130,22 @@ angular.module('test.controllers', [])
       });
     });
   }])
+  .controller('subcategoriesCtrl', ['$scope', '$timeout', '$routeParams', 'l10n', function($scope, $timeout, $routeParams, l10n) {
+    l10n.setLocale($scope.$parent.language.locale);
+    var category = $routeParams.category;
+    $scope.category = $routeParams.category;
+    $scope.subcategories = [];
+    $.get("/category/" + category, function(data) {
+      $timeout(function() {
+        $scope.category = data.data;
+      });
+    });
+    $.get("/subcategories/" + category, function(data) {
+      $timeout(function() {
+        $scope.subcategories = data.data;
+      });
+    });
+  }])
   .controller('404Ctrl', ['$scope', 'l10n', function($scope, l10n) {
     l10n.setLocale($scope.$parent.language.locale);
   }]);

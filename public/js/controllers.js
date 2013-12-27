@@ -1,19 +1,19 @@
 'use strict';
 
 angular.module('test.controllers', [])
-  .controller('mainCtrl', ['$scope', 'l10n', '$route', '$location', '$rootScope', function($scope, l10n, $route, $location, $rootScope) {
+  .controller('mainCtrl', ['$scope', 'l10n', '$route', '$location', function($scope, l10n, $route, $location) {
     l10n.setLocale('uk-UA');
     $scope.loginFlag = false;
-    $rootScope = 'trah';
-    if(sessionStorage['login-data-username'] != undefined && sessionStorage['login-data-username'].length > 0 && sessionStorage['login-data-password'] != undefined && sessionStorage['login-data-password'].length > 0)
+    $scope.user = JSON.parse(sessionStorage['user'] || '{}');
+    if($scope.user && $scope.user.id && $scope.user.id > 0)
       $scope.loginFlag = true;
     $scope.page = null;
     $scope.$on('$routeChangeSuccess', function() {
       $scope.page = $location.path();
     });
     $scope.exit = function() {
-      delete sessionStorage['login-data-username'];
-      delete sessionStorage['login-data-password'];
+      delete sessionStorage['user'];
+      $scope.user = null;
       location.reload();
     }
     $scope.goHome = function() {
@@ -23,22 +23,30 @@ angular.module('test.controllers', [])
   .controller('indexCtrl', ['$scope', '$timeout', 'l10n', function($scope, $timeout, l10n) {
     l10n.setLocale('uk-UA');
   }])
-  .controller('loginCtrl', ['$scope', '$timeout', 'l10n', function($scope, $timeout, l10n) {
+  .controller('loginCtrl', ['$scope', '$timeout', 'l10n', '$http', function($scope, $timeout, l10n, $http) {
     l10n.setLocale('uk-UA');
-    $scope.login = sessionStorage['login-data-username'];
-    $scope.password = sessionStorage['login-data-password'];
+    $scope.user = sessionStorage['user'];
     $scope.output = "test";
     $scope.signIn = function() {
-      $.get("/login/" + $scope.login + "/" + $scope.password, function(data) {
-        $timeout(function() {
-          if(data.length == 1) {
-            sessionStorage['login-data-username'] = $scope.login;
-            sessionStorage['login-data-password'] = $scope.password;
-            $scope.output = data[0].name + " " + data[0].surname;
+      var params = {
+        login : $scope.login, 
+        password : $scope.password,
+        email : $scope.email,
+        name : $scope.name,
+        surname : $scope.surname,
+        patronymic : $scope.patronymic
+      };
+      $http.post("/login", params)
+        .then(function(data) {
+          if(data.data.success) {
+            alert(data.data.data.name + " " + data.data.data.surname);
+            sessionStorage['user'] = JSON.stringify(data.data.data);
             location.reload();
-          }
+          };
+        },
+        function() {
+          alert("Error.");
         });
-      });
     }
   }])
   .controller('registerCtrl', ['$scope', 'l10n', '$http', function($scope, l10n, $http) {
@@ -77,12 +85,11 @@ angular.module('test.controllers', [])
       };
       $http.post("/register", params)
         .then(function(data) {
-        if(data.length == 1) {
-          alert(data[0].name + " " + data[0].surname);
-          sessionStorage['login-data-username'] = $scope.login;
-          sessionStorage['login-data-password'] = $scope.password;
-          window.location.reload();
-        };
+          if(data.data.success) {
+            alert(data.data.data.name + " " + data.data.data.surname);
+            sessionStorage['user'] = JSON.stringify(data.data.data);
+            location.reload();
+          };
       },
       function() {
         alert("Error.");

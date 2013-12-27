@@ -3,6 +3,7 @@
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <title>Test system</title>
+    <link rel="stylesheet" type="text/css" href="css/test-system-icon.css" />
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css" />
     <link rel="stylesheet" type="text/css" href="css/jumbotron-narrow.css" />
@@ -10,16 +11,23 @@
     <link rel="stylesheet" type="text/css" href="css/app.css" />
   </head>
   <body ng-controller="mainCtrl">
-    <div class="container container-max-width">
+    <div ng-if="!loginFlag" class="container container-max-width">
       <div class="header">
         <ul class="nav nav-pills pull-right">
+          <ul class="nav nav-pills pull-left">
+            <li class="dropdown">
+              <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#">
+                <img src="../img/{{language.image}}" /><span class="caret"></span></a>
+              <ul id="g-account-menu" class="dropdown-menu" role="menu">
+                <li ng-repeat="lang in languages" ng-click="setLanguage(lang.name)"><a href="#"><img src="../img/{{lang.image}}" />&nbsp;{{lang.name}} {{lang.locale}}</a></li>
+              </ul>
+            </li>
+          </ul>
           <li ng-class="{'active': page == '/'}"><a href="#/" l10n-text="login.btn-home"></a></li>
           <li ng-class="{'active': page == '/about'}"><a href="#/about" l10n-text="login.btn-about"></a></li>
           <li ng-class="{'active': page == '/contact'}"><a href="#/contact" l10n-text="login.btn-contact"></a></li>
-          <li ng-if="loginFlag" ng-click="exit()"><a href="#/">Exit</a></li>
-          <li ng-if="!loginFlag"><a href="#/register" l10n-text="login.register"></a></li>
+          <li ng-class="{'active': page == '/register'}"><a href="#/register" l10n-text="login.register"></a></li>
         </ul>
-        <!--<h3 class="text-muted">Test system</h3>-->
         <h2 class="cs-text" id="logo" ng-click="goHome()">
           <span>T</span>
           <span>e</span>
@@ -34,12 +42,64 @@
           <span>m</span>
           <span></span>
         </h2>
-        <!--<p l10n-text="person.str"></p>
-        <p ng-bind="output"></p>-->
       </div>
       <div ng-view></div>
       <div class="footer">
         <p>© DHARMA 2013</p>
+      </div>
+    </div>
+    <div ng-if="loginFlag">
+      <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">test-system</a>
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li ng-class="{'active': page == '/'}"><a href="#/"><i class="icon-home5"></i>&nbsp;<span l10n-text="login.btn-home"></span></a></li>
+            <li ng-class="{'active': page == '/about'}"><a href="#/about"><i class="icon-info8"></i>&nbsp;<span l10n-text="login.btn-about"></span></a></li>
+            <li ng-class="{'active': page == '/contact'}"><a href="#/contact"><i class="icon-phone"></i>&nbsp;<span l10n-text="login.btn-contact"></span></a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+              <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#">
+                <i class="glyphicon glyphicon-user"></i>&nbsp;<span ng-bind="user.login"></span>&nbsp;<span class="caret"></span></a>
+              <ul id="g-account-menu" class="dropdown-menu" role="menu">
+                <li><a href="#">My Profile</a></li>
+                <li ng-click="logout()"><a href="#"><i class="glyphicon glyphicon-off"></i>&nbsp;Logout</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <div class="container container-max-width container-top-padding">
+        <div class="row">
+          <div class="col-md-8">
+            <div ng-view></div>
+          </div>
+          <div class="col-md-4">
+            <div>
+              <h4><i class="icon-calendar4"></i>&nbsp;Calendar</h4>
+              <hr>
+              <div ng-model="dt">
+                <datepicker starting-day="1" show-weeks="true"></datepicker>
+              </div>
+            </div>
+            <div ng-if="page == '/'">
+              <h4><i class="icon-search3"></i>&nbsp;Filter</h4>
+              <hr>
+              <input type="text" class="form-control" name="query" id="query" placeholder="Start typing something to search...">              
+            </div>
+          </div>
+        </div>
+        <br />
+        <div class="footer">
+          <p>© DHARMA 2013</p>
+        </div>
       </div>
     </div>
   </body>
@@ -47,7 +107,7 @@
   <script type="text/javascript" src="lib/angular/angular.min.js"></script>
   <script type="text/javascript" src="lib/angular/angular-route.js"></script>
   <script type="text/javascript" src="lib/bootstrap.min.js"></script>
-  <script type="text/javascript" src="lib/ui-bootstrap-tpls-0.6.0.min.js"></script>
+  <script type="text/javascript" src="lib/ui-bootstrap-tpls-0.7.0.min.js"></script>
   <script type="text/javascript" src="lib/l10n.min.js"></script>
   <script type="text/javascript" src="lib/l10n-with-tools.min.js"></script>
   <script type="text/javascript" src="locale/languages.js"></script>

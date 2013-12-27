@@ -16,13 +16,18 @@ app.use(express.json())
   })
   .post('/login', function(req, res) {
     query("SELECT * FROM users WHERE login = '" + req.body.login + "' AND password = '" + req.body.password + "' LIMIT 1;", function(data) {
-      if(data.length == 0) {
+      if(data.length != 1) {
         res.json({success : false});
         return;
       }
       else {
         delete data[0].password;
-        res.json({success : true, data : data[0]});
+        query("SELECT r.title FROM rights r INNER JOIN users_rights ur ON r.id = ur.right_id INNER JOIN users u ON u.rights = ur.user_rights WHERE u.id = '" + data[0].id + "';", function(rights) {
+          data[0].rights = new Array(rights.length);
+          for(var i = 0; i < rights.length; i++)
+            data[0].rights[i] = rights[i].title;
+          res.json({success : true, data : data[0]});
+        });
       }
     });
   })
@@ -35,7 +40,12 @@ app.use(express.json())
       query("INSERT INTO users (login, password, email, name, surname, patronymic) VALUES ('" + req.body.login + "', '" + req.body.password + "', '" + req.body.email + "', '" + req.body.name + "', '" + req.body.surname + "', '" + req.body.patronymic + "');", function(data) {
           query("SELECT * FROM users WHERE login = '" + req.body.login + "' AND password = '" + req.body.password + "' LIMIT 1;", function(data) {
             delete data[0].password;
-            res.json({success : true, data : data[0]});
+            query("SELECT r.title FROM rights r INNER JOIN users_rights ur ON r.id = ur.right_id INNER JOIN users u ON u.rights = ur.user_rights WHERE u.id = '" + data[0].id + "';", function(rights) {
+              data[0].rights = new Array(rights.length);
+              for(var i = 0; i < rights.length; i++)
+                data[0].rights[i] = rights[i].title;
+              res.json({success : true, data : data[0]});
+            });
           });
       });
     });

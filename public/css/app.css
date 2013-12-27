@@ -11,6 +11,10 @@ body {
   max-width: 100%;
 }
 
+.container-top-padding {
+  padding-top: 41px;
+}
+
 .marketing {
   margin: 0 0;
 }

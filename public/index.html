@@ -10,13 +10,14 @@
     <link rel="stylesheet" type="text/css" href="css/app.css" />
   </head>
   <body ng-controller="mainCtrl">
-    <div class="container" ng-class="{'container-max-width': loginFlag}">
+    <div class="container container-max-width">
       <div class="header">
         <ul class="nav nav-pills pull-right">
           <li ng-class="{'active': page == '/'}"><a href="#/" l10n-text="login.btn-home"></a></li>
           <li ng-class="{'active': page == '/about'}"><a href="#/about" l10n-text="login.btn-about"></a></li>
           <li ng-class="{'active': page == '/contact'}"><a href="#/contact" l10n-text="login.btn-contact"></a></li>
           <li ng-if="loginFlag" ng-click="exit()"><a href="#/">Exit</a></li>
+          <li ng-if="!loginFlag"><a href="#/register" l10n-text="login.register"></a></li>
         </ul>
         <!--<h3 class="text-muted">Test system</h3>-->
         <h2 class="cs-text" id="logo" ng-click="goHome()">

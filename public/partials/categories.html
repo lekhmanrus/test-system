@@ -1,0 +1,6 @@
+<h4><i class="glyphicon glyphicon-check"></i>&nbsp;Tests</h4>
+<hr>
+<div ng-if="categories.length <= 0">Categories not found.</div>
+<div ng-if="categories.length > 0" class="list-group">
+  <a ng-repeat="category in categories" href="#/category/{{category.id}}" class="list-group-item">{{category.title}}</a>
+</div>

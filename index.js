@@ -9,9 +9,9 @@ app.use(express.json())
   .get('/', function(req, res) {
     res.sendfile(__dirname + '/public/index.html');
   })
-  .get('/data', function(req, res) {
-    query("SELECT login FROM users WHERE id = 1", function(data) {
-      res.json(data);
+  .get('/categories', function(req, res) {
+    query('SELECT * FROM "categories" ORDER BY "order"', function(data) {
+      res.json({data : data});
     });
   })
   .post('/login', function(req, res) {

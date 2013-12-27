@@ -2,9 +2,9 @@
 
 angular.module('test.controllers', [])
   .controller('mainCtrl', ['$scope', 'l10n', '$route', '$location', function($scope, l10n, $route, $location) {
-    var defaultLang = "uk";
+    var defaultLang = "ua";
     $scope.languages = {
-      uk : {name : 'uk', image : 'uk.gif', locale : 'uk-UA'},
+      ua : {name : 'ua', image : 'ua.gif', locale : 'uk-UA'},
       ru : {name : 'ru', image : 'ru.gif', locale : 'ru-RU'},
       us : {name : 'us', image : 'us.gif', locale : 'en-US'}
     };
@@ -37,10 +37,10 @@ angular.module('test.controllers', [])
     }
     $scope.dt = new Date();
   }])
-  .controller('indexCtrl', ['$scope', '$timeout', 'l10n', function($scope, $timeout, l10n) {
+  .controller('indexCtrl', ['$scope', 'l10n', function($scope, l10n) {
     l10n.setLocale('uk-UA');
   }])
-  .controller('loginCtrl', ['$scope', '$timeout', 'l10n', '$http', function($scope, $timeout, l10n, $http) {
+  .controller('loginCtrl', ['$scope', 'l10n', '$http', function($scope, l10n, $http) {
     l10n.setLocale($scope.$parent.language.locale);
     $scope.user = sessionStorage['user'];
     $scope.output = "test";
@@ -106,7 +106,9 @@ angular.module('test.controllers', [])
             alert(data.data.data.name + " " + data.data.data.surname);
             sessionStorage['user'] = JSON.stringify(data.data.data);
             location.reload();
-          };
+          }
+          else
+            alert("Error!");
       },
       function() {
         alert("Error.");
@@ -119,9 +121,14 @@ angular.module('test.controllers', [])
   .controller('contactCtrl', ['$scope', 'l10n', function($scope, l10n) {
     l10n.setLocale($scope.$parent.language.locale);
   }])
-  .controller('categoriesCtrl', ['$scope', 'l10n', function($scope, l10n) {
+  .controller('categoriesCtrl', ['$scope', '$timeout', 'l10n', function($scope, $timeout, l10n) {
     l10n.setLocale($scope.$parent.language.locale);
-
+    $scope.categories = [];
+    $.get("/categories", function(data) {
+      $timeout(function() {
+        $scope.categories = data.data;
+      });
+    });
   }])
   .controller('404Ctrl', ['$scope', 'l10n', function($scope, l10n) {
     l10n.setLocale($scope.$parent.language.locale);

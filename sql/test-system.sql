@@ -2,126 +2,24 @@
 Navicat PGSQL Data Transfer
 
 Source Server         : test-system
-Source Server Version : 90111
+Source Server Version : 90110
 Source Host           : localhost:5432
 Source Database       : test-system
 Source Schema         : public
 
 Target Server Type    : PGSQL
-Target Server Version : 90111
+Target Server Version : 90110
 File Encoding         : 65001
 
-Date: 2013-12-27 21:55:26
+Date: 2013-12-28 00:10:20
 */
-
-
--- ----------------------------
--- Sequence structure for answers_id_seq
--- ----------------------------
-DROP SEQUENCE "public"."answers_id_seq";
-CREATE SEQUENCE "public"."answers_id_seq"
- INCREMENT 1
- MINVALUE 1
- MAXVALUE 9223372036854775807
- START 1
- CACHE 1;
-
--- ----------------------------
--- Sequence structure for categories_id_seq
--- ----------------------------
-DROP SEQUENCE "public"."categories_id_seq";
-CREATE SEQUENCE "public"."categories_id_seq"
- INCREMENT 1
- MINVALUE 1
- MAXVALUE 9223372036854775807
- START 1
- CACHE 1;
-
--- ----------------------------
--- Sequence structure for questions_id_seq
--- ----------------------------
-DROP SEQUENCE "public"."questions_id_seq";
-CREATE SEQUENCE "public"."questions_id_seq"
- INCREMENT 1
- MINVALUE 1
- MAXVALUE 9223372036854775807
- START 1
- CACHE 1;
-
--- ----------------------------
--- Sequence structure for results_id_seq
--- ----------------------------
-DROP SEQUENCE "public"."results_id_seq";
-CREATE SEQUENCE "public"."results_id_seq"
- INCREMENT 1
- MINVALUE 1
- MAXVALUE 9223372036854775807
- START 1
- CACHE 1;
-
--- ----------------------------
--- Sequence structure for rights_id_seq
--- ----------------------------
-DROP SEQUENCE "public"."rights_id_seq";
-CREATE SEQUENCE "public"."rights_id_seq"
- INCREMENT 1
- MINVALUE 1
- MAXVALUE 9223372036854775807
- START 1
- CACHE 1;
-SELECT setval('"public"."rights_id_seq"', 1, true);
-
--- ----------------------------
--- Sequence structure for subjects_id_seq
--- ----------------------------
-DROP SEQUENCE "public"."subjects_id_seq";
-CREATE SEQUENCE "public"."subjects_id_seq"
- INCREMENT 1
- MINVALUE 1
- MAXVALUE 9223372036854775807
- START 1
- CACHE 1;
-
--- ----------------------------
--- Sequence structure for tests_id_seq
--- ----------------------------
-DROP SEQUENCE "public"."tests_id_seq";
-CREATE SEQUENCE "public"."tests_id_seq"
- INCREMENT 1
- MINVALUE 1
- MAXVALUE 9223372036854775807
- START 1
- CACHE 1;
-
--- ----------------------------
--- Sequence structure for users_id_seq
--- ----------------------------
-DROP SEQUENCE "public"."users_id_seq";
-CREATE SEQUENCE "public"."users_id_seq"
- INCREMENT 1
- MINVALUE 1
- MAXVALUE 9223372036854775807
- START 4
- CACHE 1;
-SELECT setval('"public"."users_id_seq"', 4, true);
-
--- ----------------------------
--- Sequence structure for users_rights_id_seq
--- ----------------------------
-DROP SEQUENCE "public"."users_rights_id_seq";
-CREATE SEQUENCE "public"."users_rights_id_seq"
- INCREMENT 1
- MINVALUE 1
- MAXVALUE 9223372036854775807
- START 1
- CACHE 1;
 
 -- ----------------------------
 -- Table structure for answers
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."answers";
 CREATE TABLE "public"."answers" (
-"id" int4 DEFAULT nextval('answers_id_seq'::regclass) NOT NULL,
+"id" SERIAL NOT NULL,
 "question_id" int4,
 "title" text COLLATE "default",
 "points" int4,
@@ -134,13 +32,31 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 -- Records of answers
 -- ----------------------------
+INSERT INTO "public"."answers" ("question_id", "title", "points", "order") VALUES ('1', '1 ans', '-2', '0');
+INSERT INTO "public"."answers" ("question_id", "title", "points", "order") VALUES ('1', '2 ans', '-1', '10');
+INSERT INTO "public"."answers" ("question_id", "title", "points", "order") VALUES ('1', '3 ans', '0', '20');
+INSERT INTO "public"."answers" ("question_id", "title", "points", "order") VALUES ('1', '4 ans', '1', '30');
+INSERT INTO "public"."answers" ("question_id", "title", "points", "order") VALUES ('1', '5 ans', '2', '40');
+INSERT INTO "public"."answers" ("question_id", "title", "points", "order") VALUES ('2', '1 ans', '-2', '0');
+INSERT INTO "public"."answers" ("question_id", "title", "points", "order") VALUES ('2', '2 ans', '-1', '10');
+INSERT INTO "public"."answers" ("question_id", "title", "points", "order") VALUES ('2', '3 ans', '0', '20');
+INSERT INTO "public"."answers" ("question_id", "title", "points", "order") VALUES ('2', '4 ans', '1', '30');
+INSERT INTO "public"."answers" ("question_id", "title", "points", "order") VALUES ('2', '5 ans', '2', '40');
+INSERT INTO "public"."answers" ("question_id", "title", "points", "order") VALUES ('3', '1 ans', '0', '20');
+INSERT INTO "public"."answers" ("question_id", "title", "points", "order") VALUES ('3', '2 ans', '1', '30');
+INSERT INTO "public"."answers" ("question_id", "title", "points", "order") VALUES ('3', '3 ans', '2', '40');
+INSERT INTO "public"."answers" ("question_id", "title", "points", "order") VALUES ('4', '1 ans', '0', '20');
+INSERT INTO "public"."answers" ("question_id", "title", "points", "order") VALUES ('4', '2 ans', '1', '30');
+INSERT INTO "public"."answers" ("question_id", "title", "points", "order") VALUES ('4', '3 ans', '2', '40');
+INSERT INTO "public"."answers" ("question_id", "title", "points", "order") VALUES ('5', '1 ans', '1', '30');
+INSERT INTO "public"."answers" ("question_id", "title", "points", "order") VALUES ('5', '2 ans', '2', '40');
 
 -- ----------------------------
 -- Table structure for categories
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."categories";
 CREATE TABLE "public"."categories" (
-"id" int4 DEFAULT nextval('categories_id_seq'::regclass) NOT NULL,
+"id" SERIAL NOT NULL,
 "title" varchar(255) COLLATE "default",
 "order" int4
 )
@@ -151,18 +67,18 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 -- Records of categories
 -- ----------------------------
-INSERT INTO "public"."categories" VALUES ('1', '1 course', '0');
-INSERT INTO "public"."categories" VALUES ('2', '2 course', '10');
-INSERT INTO "public"."categories" VALUES ('3', '3 course', '20');
-INSERT INTO "public"."categories" VALUES ('4', '4 course', '30');
-INSERT INTO "public"."categories" VALUES ('5', '5 course', '40');
+INSERT INTO "public"."categories" ("title", "order") VALUES ('1 course', '0');
+INSERT INTO "public"."categories" ("title", "order") VALUES ('2 course', '10');
+INSERT INTO "public"."categories" ("title", "order") VALUES ('3 course', '20');
+INSERT INTO "public"."categories" ("title", "order") VALUES ('4 course', '30');
+INSERT INTO "public"."categories" ("title", "order") VALUES ('5 course', '40');
 
 -- ----------------------------
 -- Table structure for questions
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."questions";
 CREATE TABLE "public"."questions" (
-"id" int4 DEFAULT nextval('questions_id_seq'::regclass) NOT NULL,
+"id" SERIAL NOT NULL,
 "test_id" int4,
 "title" text COLLATE "default",
 "order" int4
@@ -174,13 +90,18 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 -- Records of questions
 -- ----------------------------
+INSERT INTO "public"."questions" ("test_id", "title", "order") VALUES ('1', '1 question', '0');
+INSERT INTO "public"."questions" ("test_id", "title", "order") VALUES ('1', '2 question', '10');
+INSERT INTO "public"."questions" ("test_id", "title", "order") VALUES ('1', '3 question', '20');
+INSERT INTO "public"."questions" ("test_id", "title", "order") VALUES ('1', '4 question', '30');
+INSERT INTO "public"."questions" ("test_id", "title", "order") VALUES ('1', '5 question', '40');
 
 -- ----------------------------
 -- Table structure for results
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."results";
 CREATE TABLE "public"."results" (
-"id" int4 DEFAULT nextval('results_id_seq'::regclass) NOT NULL,
+"id" SERIAL NOT NULL,
 "user_id" int4,
 "test_id" int4,
 "points" int4
@@ -198,7 +119,7 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."rights";
 CREATE TABLE "public"."rights" (
-"id" int4 DEFAULT nextval('rights_id_seq'::regclass) NOT NULL,
+"id" SERIAL NOT NULL,
 "title" varchar(255) COLLATE "default" DEFAULT NULL::character varying
 )
 WITH (OIDS=FALSE)
@@ -208,29 +129,29 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 -- Records of rights
 -- ----------------------------
-INSERT INTO "public"."rights" VALUES ('1', 'adduser');
-INSERT INTO "public"."rights" VALUES ('2', 'addtest');
-INSERT INTO "public"."rights" VALUES ('3', 'addrights');
-INSERT INTO "public"."rights" VALUES ('4', 'addanswers');
-INSERT INTO "public"."rights" VALUES ('5', 'addquestions');
-INSERT INTO "public"."rights" VALUES ('6', 'addcategories');
-INSERT INTO "public"."rights" VALUES ('7', 'printresults');
-INSERT INTO "public"."rights" VALUES ('8', 'testing');
-INSERT INTO "public"."rights" VALUES ('9', 'edituser');
-INSERT INTO "public"."rights" VALUES ('10', 'edittest');
-INSERT INTO "public"."rights" VALUES ('11', 'editrights');
-INSERT INTO "public"."rights" VALUES ('12', 'editanswers');
-INSERT INTO "public"."rights" VALUES ('13', 'editquestions');
-INSERT INTO "public"."rights" VALUES ('14', 'editcategories');
-INSERT INTO "public"."rights" VALUES ('15', 'addsubjects');
-INSERT INTO "public"."rights" VALUES ('16', 'editsubjects');
+INSERT INTO "public"."rights" ("title") VALUES ('adduser');
+INSERT INTO "public"."rights" ("title") VALUES ('addtest');
+INSERT INTO "public"."rights" ("title") VALUES ('addrights');
+INSERT INTO "public"."rights" ("title") VALUES ('addanswers');
+INSERT INTO "public"."rights" ("title") VALUES ('addquestions');
+INSERT INTO "public"."rights" ("title") VALUES ('addcategories');
+INSERT INTO "public"."rights" ("title") VALUES ('printresults');
+INSERT INTO "public"."rights" ("title") VALUES ('testing');
+INSERT INTO "public"."rights" ("title") VALUES ('edituser');
+INSERT INTO "public"."rights" ("title") VALUES ('edittest');
+INSERT INTO "public"."rights" ("title") VALUES ('editrights');
+INSERT INTO "public"."rights" ("title") VALUES ('editanswers');
+INSERT INTO "public"."rights" ("title") VALUES ('editquestions');
+INSERT INTO "public"."rights" ("title") VALUES ('editcategories');
+INSERT INTO "public"."rights" ("title") VALUES ('addsubjects');
+INSERT INTO "public"."rights" ("title") VALUES ('editsubjects');
 
 -- ----------------------------
--- Table structure for subjects
+-- Table structure for subcategories
 -- ----------------------------
-DROP TABLE IF EXISTS "public"."subjects";
-CREATE TABLE "public"."subjects" (
-"id" int4 DEFAULT nextval('subjects_id_seq'::regclass) NOT NULL,
+DROP TABLE IF EXISTS "public"."subcategories";
+CREATE TABLE "public"."subcategories" (
+"id" SERIAL NOT NULL,
 "category_id" int4,
 "title" varchar(255) COLLATE "default",
 "order" int4
@@ -240,16 +161,19 @@ WITH (OIDS=FALSE)
 ;
 
 -- ----------------------------
--- Records of subjects
+-- Records of subcategories
 -- ----------------------------
+INSERT INTO "public"."subcategories" ("category_id", "title", "order") VALUES ('1', 'Основи алгоритмізації', '0');
+INSERT INTO "public"."subcategories" ("category_id", "title", "order") VALUES ('1', 'Лінійна алгебра', '10');
+INSERT INTO "public"."subcategories" ("category_id", "title", "order") VALUES ('1', 'Групова динаміка', '20');
 
 -- ----------------------------
 -- Table structure for tests
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."tests";
 CREATE TABLE "public"."tests" (
-"id" int4 DEFAULT nextval('tests_id_seq'::regclass) NOT NULL,
-"subject_id" int4 NOT NULL,
+"id" SERIAL NOT NULL,
+"subcategory_id" int4 NOT NULL,
 "title" varchar(255) COLLATE "default",
 "description" varchar(255) COLLATE "default",
 "start" timestamp(6),
@@ -263,13 +187,16 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 -- Records of tests
 -- ----------------------------
+INSERT INTO "public"."tests" ("subcategory_id", "title", "description", "order") VALUES ('1', 'Тема 1', 'Опис 1', '0');
+INSERT INTO "public"."tests" ("subcategory_id", "title", "description", "order") VALUES ('1', 'Тема 2', 'Опис 2', '10');
+INSERT INTO "public"."tests" ("subcategory_id", "title", "description", "order") VALUES ('1', 'Тема 3', 'Опис 3', '20');
 
 -- ----------------------------
 -- Table structure for users
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."users";
 CREATE TABLE "public"."users" (
-"id" int4 DEFAULT nextval('users_id_seq'::regclass) NOT NULL,
+"id" SERIAL NOT NULL,
 "login" varchar(255) COLLATE "default" NOT NULL,
 "password" varchar(255) COLLATE "default" NOT NULL,
 "name" varchar(255) COLLATE "default" DEFAULT NULL::character varying,
@@ -285,16 +212,14 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO "public"."users" VALUES ('1', 'lekhmanrus', '7777777', 'Ruslan', 'Lekhman', 'Vitaliyevych', '0', 'lekhman-ruslan@i.ua');
-INSERT INTO "public"."users" VALUES ('2', 'test__', '7777777', 'TEST_N', 'TEST_S', 'TEST_P', '1', 'undefined');
-INSERT INTO "public"."users" VALUES ('3', '1111111', '11111111', '111', '1111', '111', '1', 'undefined');
+INSERT INTO "public"."users" ("login", "password", "name", "surname", "patronymic", "rights", "email") VALUES ('lekhmanrus', '7777777', 'Ruslan', 'Lekhman', 'Vitaliyevych', '0', 'lekhman-ruslan@i.ua');
 
 -- ----------------------------
 -- Table structure for users_rights
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."users_rights";
 CREATE TABLE "public"."users_rights" (
-"id" int4 DEFAULT nextval('users_rights_id_seq'::regclass) NOT NULL,
+"id" SERIAL NOT NULL,
 "right_id" int4 NOT NULL,
 "user_rights" int4 NOT NULL
 )
@@ -305,36 +230,23 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 -- Records of users_rights
 -- ----------------------------
-INSERT INTO "public"."users_rights" VALUES ('1', '1', '0');
-INSERT INTO "public"."users_rights" VALUES ('2', '2', '0');
-INSERT INTO "public"."users_rights" VALUES ('3', '3', '0');
-INSERT INTO "public"."users_rights" VALUES ('4', '4', '0');
-INSERT INTO "public"."users_rights" VALUES ('5', '5', '0');
-INSERT INTO "public"."users_rights" VALUES ('6', '6', '0');
-INSERT INTO "public"."users_rights" VALUES ('7', '7', '0');
-INSERT INTO "public"."users_rights" VALUES ('8', '8', '0');
-INSERT INTO "public"."users_rights" VALUES ('9', '9', '0');
-INSERT INTO "public"."users_rights" VALUES ('10', '10', '0');
-INSERT INTO "public"."users_rights" VALUES ('11', '11', '0');
-INSERT INTO "public"."users_rights" VALUES ('12', '12', '0');
-INSERT INTO "public"."users_rights" VALUES ('13', '13', '0');
-INSERT INTO "public"."users_rights" VALUES ('14', '14', '0');
-INSERT INTO "public"."users_rights" VALUES ('15', '15', '0');
-INSERT INTO "public"."users_rights" VALUES ('16', '16', '0');
-INSERT INTO "public"."users_rights" VALUES ('17', '8', '1');
-
--- ----------------------------
--- Alter Sequences Owned By 
--- ----------------------------
-ALTER SEQUENCE "public"."answers_id_seq" OWNED BY "answers"."id";
-ALTER SEQUENCE "public"."categories_id_seq" OWNED BY "categories"."id";
-ALTER SEQUENCE "public"."questions_id_seq" OWNED BY "questions"."id";
-ALTER SEQUENCE "public"."results_id_seq" OWNED BY "results"."id";
-ALTER SEQUENCE "public"."rights_id_seq" OWNED BY "rights"."id";
-ALTER SEQUENCE "public"."subjects_id_seq" OWNED BY "subjects"."id";
-ALTER SEQUENCE "public"."tests_id_seq" OWNED BY "tests"."id";
-ALTER SEQUENCE "public"."users_id_seq" OWNED BY "users"."id";
-ALTER SEQUENCE "public"."users_rights_id_seq" OWNED BY "users_rights"."id";
+INSERT INTO "public"."users_rights" ("right_id", "user_rights") VALUES ('1', '0');
+INSERT INTO "public"."users_rights" ("right_id", "user_rights") VALUES ('2', '0');
+INSERT INTO "public"."users_rights" ("right_id", "user_rights") VALUES ('3', '0');
+INSERT INTO "public"."users_rights" ("right_id", "user_rights") VALUES ('4', '0');
+INSERT INTO "public"."users_rights" ("right_id", "user_rights") VALUES ('5', '0');
+INSERT INTO "public"."users_rights" ("right_id", "user_rights") VALUES ('6', '0');
+INSERT INTO "public"."users_rights" ("right_id", "user_rights") VALUES ('7', '0');
+INSERT INTO "public"."users_rights" ("right_id", "user_rights") VALUES ('8', '0');
+INSERT INTO "public"."users_rights" ("right_id", "user_rights") VALUES ('9', '0');
+INSERT INTO "public"."users_rights" ("right_id", "user_rights") VALUES ('10', '0');
+INSERT INTO "public"."users_rights" ("right_id", "user_rights") VALUES ('11', '0');
+INSERT INTO "public"."users_rights" ("right_id", "user_rights") VALUES ('12', '0');
+INSERT INTO "public"."users_rights" ("right_id", "user_rights") VALUES ('13', '0');
+INSERT INTO "public"."users_rights" ("right_id", "user_rights") VALUES ('14', '0');
+INSERT INTO "public"."users_rights" ("right_id", "user_rights") VALUES ('15', '0');
+INSERT INTO "public"."users_rights" ("right_id", "user_rights") VALUES ('16', '0');
+INSERT INTO "public"."users_rights" ("right_id", "user_rights") VALUES ('8', '1');
 
 -- ----------------------------
 -- Primary Key structure for table answers
@@ -362,9 +274,9 @@ ALTER TABLE "public"."results" ADD PRIMARY KEY ("id");
 ALTER TABLE "public"."rights" ADD PRIMARY KEY ("id");
 
 -- ----------------------------
--- Primary Key structure for table subjects
+-- Primary Key structure for table subcategories
 -- ----------------------------
-ALTER TABLE "public"."subjects" ADD PRIMARY KEY ("id");
+ALTER TABLE "public"."subcategories" ADD PRIMARY KEY ("id");
 
 -- ----------------------------
 -- Primary Key structure for table tests

@@ -13,5 +13,7 @@ angular.module('test', ['ngRoute', 'test.filters', 'test.services', 'test.direct
     if(user && user.id > 0)
       $routeProvider.when('/', {templateUrl: 'partials/categories.html', controller: 'categoriesCtrl'})
                     .when('/register', {templateUrl: 'partials/categories.html', controller: 'categoriesCtrl'})
-                    .when('/category/:category', {templateUrl: 'partials/subcategories.html', controller: 'subcategoriesCtrl'});
+                    .when('/category/:category', {templateUrl: 'partials/subcategories.html', controller: 'subcategoriesCtrl'})
+                    .when('/category/:category/:subcategory', {templateUrl: 'partials/tests.html', controller: 'testsCtrl'})
+                    .when('/category/:category/:subcategory/test/:test', {templateUrl: 'partials/questions.html', controller: 'questionsCtrl'});
   }]);

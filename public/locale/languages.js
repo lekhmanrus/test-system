@@ -110,7 +110,7 @@ angular.module('test.languages', ['l10n', 'l10n-tools']).config(['l10nProvider',
       'btn-contact': 'Contacts',
       ua: 'Ukrainian',
       ru: 'Russian',
-      us: 'American',
+      us: 'English',
       signout: 'Logout'
     },
     login: {

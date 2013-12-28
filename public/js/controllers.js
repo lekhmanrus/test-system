@@ -132,17 +132,64 @@ angular.module('test.controllers', [])
   }])
   .controller('subcategoriesCtrl', ['$scope', '$timeout', '$routeParams', 'l10n', function($scope, $timeout, $routeParams, l10n) {
     l10n.setLocale($scope.$parent.language.locale);
-    var category = $routeParams.category;
     $scope.category = $routeParams.category;
     $scope.subcategories = [];
-    $.get("/category/" + category, function(data) {
+    $.get("/category/" +  $scope.category, function(data) {
       $timeout(function() {
         $scope.category = data.data;
       });
     });
-    $.get("/subcategories/" + category, function(data) {
+    $.get("/subcategories/" +  $scope.category, function(data) {
       $timeout(function() {
         $scope.subcategories = data.data;
+      });
+    });
+  }])
+  .controller('testsCtrl', ['$scope', '$timeout', '$routeParams', 'l10n', function($scope, $timeout, $routeParams, l10n) {
+    l10n.setLocale($scope.$parent.language.locale);
+    $scope.category = $routeParams.category;
+    $scope.subcategory = $routeParams.subcategory;
+    $scope.tests = [];
+    $.get("/category/" +  $scope.category, function(data) {
+      $timeout(function() {
+        $scope.category = data.data;
+      });
+    });
+    $.get("/subcategory/" +  $scope.subcategory, function(data) {
+      $timeout(function() {
+        $scope.subcategory = data.data;
+      });
+    });
+    $.get("/tests/" +  $scope.subcategory, function(data) {
+      $timeout(function() {
+        $scope.tests = data.data;
+      });
+    });
+  }])
+  .controller('questionsCtrl', ['$scope', '$timeout', '$routeParams', 'l10n', function($scope, $timeout, $routeParams, l10n) {
+    l10n.setLocale($scope.$parent.language.locale);
+    $scope.category = $routeParams.category;
+    $scope.subcategory = $routeParams.subcategory;
+    $scope.test = $routeParams.test;
+    $scope.questions = [];
+    $.get("/category/" +  $scope.category, function(data) {
+      $timeout(function() {
+        $scope.category = data.data;
+      });
+    });
+    $.get("/subcategory/" +  $scope.subcategory, function(data) {
+      $timeout(function() {
+        $scope.subcategory = data.data;
+      });
+    });
+    $.get("/test/" +  $scope.test, function(data) {
+      $timeout(function() {
+        $scope.test = data.data;
+      });
+    });
+    $.get("/questions/" +  $scope.test, function(data) {
+      $timeout(function() {
+        $scope.questions = data.data;
       });
     });
   }])

@@ -9,18 +9,51 @@ app.use(express.json())
   .get('/', function(req, res) {
     res.sendfile(__dirname + '/public/index.html');
   })
-  .get('/categories', function(req, res) {
-    query('SELECT * FROM "categories" ORDER BY "order";', function(data) {
-      res.json({data : data});
-    });
-  })
   .get('/category/:category', function(req, res) {
     query('SELECT * FROM "categories" WHERE "id" = ' + req.params.category + ' LIMIT 1;', function(data) {
       res.json({data : data[0]});
     });
   })
+  .get('/subcategory/:subcategory', function(req, res) {
+    query('SELECT * FROM "subcategories" WHERE "id" = ' + req.params.subcategory + ' LIMIT 1;', function(data) {
+      res.json({data : data[0]});
+    });
+  })
+  .get('/test/:test', function(req, res) {
+    query('SELECT * FROM "tests" WHERE "id" = ' + req.params.test + ' LIMIT 1;', function(data) {
+      res.json({data : data[0]});
+    });
+  })
+  .get('/categories', function(req, res) {
+    query('SELECT * FROM "categories" ORDER BY "order", "id";', function(data) {
+      res.json({data : data});
+    });
+  })
   .get('/subcategories/:category', function(req, res) {
-    query('SELECT * FROM "subcategories" WHERE "category_id" = ' + req.params.category + ' ORDER BY "order";', function(data) {
+    query('SELECT * FROM "subcategories" WHERE "category_id" = ' + req.params.category + ' ORDER BY "order", "id";', function(data) {
+      res.json({data : data});
+    });
+  })
+  .get('/tests/:subcategory', function(req, res) {
+    query('SELECT * FROM "tests" WHERE "subcategory_id" = ' + req.params.subcategory + ' ORDER BY "order", "id";', function(data) {
+      res.json({data : data});
+    });
+  })
+  .get('/questions/:test', function(req, res) {
+    query('SELECT * FROM "questions" WHERE "test_id" = ' + req.params.test + ' ORDER BY "order", "id";', function(data) {
+      for(var i = 0; i < data.length;) {
+        query('SELECT * FROM "answers" WHERE "question_id" = ' + data[i].id + ' ORDER BY "order", "id";', function(answers) {
+          /*data[i].answers = new Array(answers.length);
+          for(var j = 0; j < answers.length; j++) {
+            delete answers[j].points;
+            data[i].answers[j] = answers[j]
+          }
+          console.log(answers);*/
+          console.log(data[i]);
+        });
+        data[i].number = ++i;
+      }
+      //console.log(data);
       res.json({data : data});
     });
   })

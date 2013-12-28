@@ -7,7 +7,9 @@ angular.module('test.languages', ['l10n', 'l10n-tools']).config(['l10nProvider',
       ua: 'Українська',
       ru: 'Російська',
       us: 'Англійська',
-      signout: 'Вихід'
+      signout: 'Вихід',
+      test: 'Тести',
+      'btn-about-text': 'DHARMA - команда професійних програмістів, що займаються розробкою програмних продуктів для багатьох сфер діяльності. Серед них продукти різної складності: від невеликих прикладних програм до складних програмних комплексів і клієнт-серверних додатків. За допомогою наших знань, ми хочемо зробити Ваше життя комфортнішим, а бізнес - прибутковішим. Довірте нам рішення своїх IT-задач, і ми розробимо програму Вашого майбутнього!'
     },
     login: {
       auth: 'Будь ласка, авторизуйтесь у системі',
@@ -59,7 +61,9 @@ angular.module('test.languages', ['l10n', 'l10n-tools']).config(['l10nProvider',
       ua: 'Украинский',
       ru: 'Русский',
       us: 'Английский',
-      signout: 'Выход'
+      signout: 'Выход',
+      test: 'Тесты',
+      'btn-about-text': 'DHARMA - команда профессиональных программистов, занимающихся разработкой программных продуктов для многих сфер деятельности. Среди них продукты различной сложности: от небольших прикладных программ до сложных программных комплексов и клиент-серверных приложений. С помощью наших знаний, мы хотим сделать Вашу жизнь комфортнее, а бизнес – прибыльнее. Доверьте нам решение своих IT-задач, и мы разработаем программу Вашего будущего!'
     },
     login: {
       auth: 'Пожалуйста, авторизируйтесь в системе',
@@ -111,7 +115,9 @@ angular.module('test.languages', ['l10n', 'l10n-tools']).config(['l10nProvider',
       ua: 'Ukrainian',
       ru: 'Russian',
       us: 'English',
-      signout: 'Logout'
+      signout: 'Logout',
+      test: 'Test',
+      'btn-about-text': 'DHARMA - a team of professional programmers developing software for many spheres of activity. Among them are products of varying complexity, from small applications to complex software systems and client-server applications. With our knowledge, we want to make your life more comfortable, and business - profitable. Entrust us with their IT-tasks, and we will develop a program for your future!'
     },
     login: {
       auth: 'Please sign in',

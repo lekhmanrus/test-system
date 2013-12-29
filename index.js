@@ -66,7 +66,6 @@ app.use(express.json())
           else
             data[i].answers = answ[j++];
         }
-        console.log(data);
         res.json({data : data});
       });
     });

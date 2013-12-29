@@ -121,12 +121,16 @@
             <div ng-if="page == '/' || page.indexOf('/category') == 0">
               <h4><i class="icon-search3"></i>&nbsp;Filter</h4>
               <hr>
-              <input type="text" class="form-control" name="query" id="query" placeholder="Start typing something to search...">              
+              <input type="text" class="form-control" name="query" id="query" placeholder="Start typing something to search...">
             </div>
           </div>
         </div>
         <div ng-if="page.indexOf('/category') == 0 && page.indexOf('/test') > 0" class="row">
-          <div class="col-md-12">
+          <div ng-if="!actions" class="col-md-12">
+            <div ng-view></div>
+          </div>
+          <div ng-if="actions" class="col-md-2"></div>
+          <div ng-if="actions" class="col-md-10">
             <div ng-view></div>
           </div>
         </div>

@@ -58,14 +58,15 @@ app.use(express.json())
             }
           )}.bind(this, i));
       async.waterfall(b, function(err, result) {
-        for(var i = 0; i < data.length; i++) {
+        for(var i = 0, j = 0; i < data.length; i++) {
           data[i].number = i + 1;
-          data[i].answers = answ[i];
+          //data[i].answers = answ[i];
           if(data[i].type == 'text' || data[i].type == 'textarea')
             data[i].result = '';
           else
-            data[i].answers = answ[i];
+            data[i].answers = answ[j++];
         }
+        console.log(data);
         res.json({data : data});
       });
     });
@@ -120,8 +121,6 @@ app.use(express.json())
           var cats = [];
           for(var i = 0; i < rights.length; i++)
             cats[rights[i].category] = rights[i].category;
-
-          console.log('SELECT id, title FROM rights_categories WHERE id IN (' + cats.toString().substr(1) + ') ORDER BY "order", "id";');
           if(cats.length > 0)
             query('SELECT id, title FROM rights_categories WHERE id IN (' + cats.toString().substr(1) + ') ORDER BY "order", "id";', function(c) {
               var actions = [];

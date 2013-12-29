@@ -221,6 +221,7 @@ angular.module('test.controllers', [])
     $.get("/questions/" +  $scope.test, function(data) {
       $timeout(function() {
         $scope.questions = data.data;
+        console.log($scope.questions);
         $scope.$parent.loading = false;
       });
     });

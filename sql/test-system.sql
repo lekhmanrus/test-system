@@ -121,7 +121,10 @@ WITH (OIDS=FALSE)
 DROP TABLE IF EXISTS "public"."rights";
 CREATE TABLE "public"."rights" (
 "id" SERIAL NOT NULL,
-"title" varchar(255) COLLATE "default" DEFAULT NULL::character varying
+"category" int4,
+"url" varchar(40) COLLATE "default" DEFAULT NULL::character varying,
+"title" varchar(40) COLLATE "default" DEFAULT NULL::character varying,
+"order" int4
 )
 WITH (OIDS=FALSE)
 
@@ -130,22 +133,37 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 -- Records of rights
 -- ----------------------------
-INSERT INTO "public"."rights" ("title") VALUES ('adduser');
-INSERT INTO "public"."rights" ("title") VALUES ('addtest');
-INSERT INTO "public"."rights" ("title") VALUES ('addrights');
-INSERT INTO "public"."rights" ("title") VALUES ('addanswers');
-INSERT INTO "public"."rights" ("title") VALUES ('addquestions');
-INSERT INTO "public"."rights" ("title") VALUES ('addcategories');
-INSERT INTO "public"."rights" ("title") VALUES ('printresults');
-INSERT INTO "public"."rights" ("title") VALUES ('testing');
-INSERT INTO "public"."rights" ("title") VALUES ('edituser');
-INSERT INTO "public"."rights" ("title") VALUES ('edittest');
-INSERT INTO "public"."rights" ("title") VALUES ('editrights');
-INSERT INTO "public"."rights" ("title") VALUES ('editanswers');
-INSERT INTO "public"."rights" ("title") VALUES ('editquestions');
-INSERT INTO "public"."rights" ("title") VALUES ('editcategories');
-INSERT INTO "public"."rights" ("title") VALUES ('addsubjects');
-INSERT INTO "public"."rights" ("title") VALUES ('editsubjects');
+INSERT INTO "public"."rights" ("category", "url", "title", "order") VALUES ('1', 'adduser', 'Додавання', '0');
+INSERT INTO "public"."rights" ("category", "url", "title", "order") VALUES ('1', 'edituser', 'Редагування', '10');
+INSERT INTO "public"."rights" ("category", "url", "title", "order") VALUES ('1', 'deleteuser', 'Видалення', '20');
+INSERT INTO "public"."rights" ("category", "url", "title", "order") VALUES ('2', 'menageanswers', 'Відповіді', '70');
+INSERT INTO "public"."rights" ("category", "url", "title", "order") VALUES ('2', 'menagequestions', 'Питання', '60');
+INSERT INTO "public"."rights" ("category", "url", "title", "order") VALUES ('2', 'menagetests', 'Тести', '50');
+INSERT INTO "public"."rights" ("category", "url", "title", "order") VALUES ('2', 'menagesubcategories', 'Підкатегорії', '40');
+INSERT INTO "public"."rights" ("category", "url", "title", "order") VALUES ('2', 'menagecategories', 'Категорії', '30');
+INSERT INTO "public"."rights" ("category", "url", "title", "order") VALUES ('3', 'addrights', 'Додавання', '80');
+INSERT INTO "public"."rights" ("category", "url", "title", "order") VALUES ('3', 'editrights', 'Редагування', '90');
+INSERT INTO "public"."rights" ("category", "url", "title", "order") VALUES ('3', 'deleterights', 'Видалення', '100');
+
+-- ----------------------------
+-- Table structure for rights_categories
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."rights_categories";
+CREATE TABLE "public"."rights_categories" (
+"id" SERIAL NOT NULL,
+"title" varchar(40) COLLATE "default" DEFAULT NULL::character varying,
+"order" int4
+)
+WITH (OIDS=FALSE)
+
+;
+
+-- ----------------------------
+-- Records of rights_categories
+-- ----------------------------
+INSERT INTO "public"."rights_categories" ("title", "order") VALUES ('Користувачі', '10');
+INSERT INTO "public"."rights_categories" ("title", "order") VALUES ('Система тестування', '0');
+INSERT INTO "public"."rights_categories" ("title", "order") VALUES ('Права', '20');
 
 -- ----------------------------
 -- Table structure for subcategories
@@ -247,7 +265,6 @@ INSERT INTO "public"."users_rights" ("right_id", "user_rights") VALUES ('13', '0
 INSERT INTO "public"."users_rights" ("right_id", "user_rights") VALUES ('14', '0');
 INSERT INTO "public"."users_rights" ("right_id", "user_rights") VALUES ('15', '0');
 INSERT INTO "public"."users_rights" ("right_id", "user_rights") VALUES ('16', '0');
-INSERT INTO "public"."users_rights" ("right_id", "user_rights") VALUES ('8', '1');
 
 -- ----------------------------
 -- Primary Key structure for table answers

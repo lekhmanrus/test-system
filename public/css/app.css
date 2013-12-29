@@ -40,3 +40,54 @@ h2#logo, h2#logo span {
 .jumbotron .popover {
   font-size: 14px;
 }
+
+  .side-nav {
+    margin-left: -225px;
+    left: 225px;
+    width: 225px;
+    position: fixed;
+    top: 50px;
+    height: 100%;
+    border-radius: 0;
+    border: none;
+    background-color: #222222;
+    overflow-y: auto;
+  }
+
+  .side-nav>li.dropdown>ul.dropdown-menu {
+    position: relative;
+    min-width: 225px;
+    margin: 0;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    background-color: transparent;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+  }
+
+  .side-nav>li.dropdown>ul.dropdown-menu>li>a {
+    color: #999999;
+    padding: 15px 15px 15px 25px;
+  }
+
+  .side-nav>li.dropdown>ul.dropdown-menu>li>a:hover,
+  .side-nav>li.dropdown>ul.dropdown-menu>li>a.active,
+  .side-nav>li.dropdown>ul.dropdown-menu>li>a:focus {
+    color: #080808;
+  }
+  .side-nav>li.dropdown>ul.dropdown-menu>li>a.active:hover,
+  .side-nav>li.dropdown>ul.dropdown-menu>li>a:focus.active,
+  .side-nav>li.dropdown>ul.dropdown-menu>li>a.active {
+    color: #FFFFFF;
+    background: #357EBD !important;
+  }
+
+  .side-nav>li>a {
+    width: 225px;
+  }
+
+  .navbar-inverse .navbar-nav>li>a:hover,
+  .navbar-inverse .navbar-nav>li>a:focus {
+    background-color: #080808;
+  }

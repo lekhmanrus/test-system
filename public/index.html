@@ -2,13 +2,14 @@
 <html lang="ua" ng-app="test">
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <title>Test system</title>
+    <title>test-system</title>
     <link rel="stylesheet" type="text/css" href="css/test-system-icon.css" />
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css" />
     <link rel="stylesheet" type="text/css" href="css/jumbotron-narrow.css" />
     <link rel="stylesheet" type="text/css" href="css/bootstrap-datepicker.css" />
     <link rel="stylesheet" type="text/css" href="css/toaster.css" />
+    <link rel="stylesheet" type="text/css" href="css/chasing-dots.css" />
     <link rel="stylesheet" type="text/css" href="css/logo.css" />
     <link rel="stylesheet" type="text/css" href="css/app.css" />
   </head>
@@ -86,13 +87,32 @@
             </li>
           </ul>
         </div>
+        <ul ng-if="actions" class="nav navbar-nav side-nav">
+          <li ng-repeat="action in actions" class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-caret-square-o-down"></i> {{action.title}} <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li ng-repeat="right in action.rights"><a ng-class="{'active': page.indexOf('/' + right.url) > 0}" href="#/admin/c{{action.id}}/{{right.url}}">{{right.title}}</a></li>
+            </ul>
+          </li>
+        </ul>
       </nav>
       <div class="container container-max-width container-top-padding">
         <div ng-if="page.indexOf('/test') == -1" class="row">
-          <div class="col-md-9">
-            <div ng-view></div>
+          <div ng-if="!actions">
+            <div class="col-md-9">
+              <div ng-view></div>
+            </div>
           </div>
-          <div class="col-md-3">
+          <div ng-if="actions">
+            <div class="col-md-2"></div>
+            <div ng-if="page.indexOf('/admin') >= 0" class="col-md-7">
+              <div ng-view></div>
+            </div>
+            <div ng-if="page.indexOf('/admin') == -1" class="col-md-10">
+              <div ng-view></div>
+            </div>
+          </div>
+          <div ng-if="page.indexOf('/admin') >= 0" class="col-md-3">
             <div>
               <h4><i class="icon-calendar4"></i>&nbsp;Calendar</h4>
               <hr>
@@ -112,9 +132,13 @@
         </div>
         <br />
         <div class="footer">
-          <p>© DHARMA 2013</p>
+          <p align="right">© DHARMA 2013</p>
         </div>
       </div>
+    </div>
+    <div ng-if="loading" class="spinner">
+      <div class="dot1"></div>
+      <div class="dot2"></div>
     </div>
   </body>
   <script type="text/javascript" src="lib/jquery-2.0.3.min.js"></script>
@@ -126,6 +150,7 @@
   <script type="text/javascript" src="lib/ui-bootstrap-tpls-0.7.0.min.js"></script>
   <script type="text/javascript" src="lib/angular-animate.min.js"></script>
   <script type="text/javascript" src="lib/toaster.js"></script>
+  <script type="text/javascript" src="lib/angular-fullscreen.js"></script>
   <script type="text/javascript" src="lib/l10n.min.js"></script>
   <script type="text/javascript" src="lib/l10n-with-tools.min.js"></script>
   <script type="text/javascript" src="locale/languages.js"></script>

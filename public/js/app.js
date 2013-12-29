@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('test', ['ngRoute', 'test.filters', 'test.services', 'test.directives', 'test.controllers', 'ui.bootstrap', 'l10n', 'l10n-tools', 'test.languages']).
+angular.module('test', ['ngRoute', 'test.filters', 'test.services', 'test.directives', 'test.controllers', 'ui.bootstrap', 'l10n', 'l10n-tools', 'test.languages', '$strap.directives', 'toaster']).
   config(['$routeProvider', function($routeProvider) {
     $routeProvider.when('/', {templateUrl: 'partials/login.html', controller: 'loginCtrl'})
                   .when('/register', {templateUrl: 'partials/register.html', controller: 'registerCtrl'})

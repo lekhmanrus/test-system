@@ -842,6 +842,9 @@
 .icon-arrow-left:before {
 	content: "\e710";
 }
+.icon-arrow-right:before {
+	content: "\e70f";
+}
 .icon-arrow-down:before {
 	content: "\e711";
 }

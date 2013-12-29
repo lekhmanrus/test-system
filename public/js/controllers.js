@@ -8,17 +8,14 @@ angular.module('test.controllers', [])
       ru : {name : 'ru', image : 'ru.gif', locale : 'ru-RU'},
       us : {name : 'us', image : 'us.gif', locale : 'en-US'}
     };
-
     $scope.language = $scope.languages[defaultLang];
     if(sessionStorage['language'])
       $scope.language = JSON.parse(sessionStorage['language'] || $scope.languages[defaultLang]);
     l10n.setLocale($scope.language.locale);
-
     $scope.setLanguage = function(lang) {
       sessionStorage['language'] = JSON.stringify($scope.languages[lang]);
       location.reload();
     }
-
     $scope.loginFlag = false;
     $scope.user = JSON.parse(sessionStorage['user'] || '{}');
     if($scope.user && $scope.user.id && $scope.user.id > 0)
@@ -35,12 +32,11 @@ angular.module('test.controllers', [])
     $scope.goHome = function() {
       $location.path('/');
     }
-    $scope.dt = new Date();
   }])
   .controller('indexCtrl', ['$scope', 'l10n', function($scope, l10n) {
     l10n.setLocale('uk-UA');
   }])
-  .controller('loginCtrl', ['$scope', 'l10n', '$http', function($scope, l10n, $http) {
+  .controller('loginCtrl', ['$scope', 'l10n', '$http', 'toaster', function($scope, l10n, $http, toaster) {
     l10n.setLocale($scope.$parent.language.locale);
     $scope.user = sessionStorage['user'];
     $scope.output = "test";
@@ -48,25 +44,22 @@ angular.module('test.controllers', [])
       var params = {
         login : $scope.login, 
         password : $scope.password,
-        email : $scope.email,
-        name : $scope.name,
-        surname : $scope.surname,
-        patronymic : $scope.patronymic
       };
       $http.post("/login", params)
         .then(function(data) {
           if(data.data.success) {
-            alert(data.data.data.name + " " + data.data.data.surname);
             sessionStorage['user'] = JSON.stringify(data.data.data);
             location.reload();
-          };
+          }
+          else
+            toaster.pop('error', "Помилка", "Введений логін та/або пароль невірні. Спробуйте ще раз.");
         },
         function() {
-          alert("Error.");
+          toaster.pop('error', "Помилка", "Повторіть спробу пізніше.");
         });
     }
   }])
-  .controller('registerCtrl', ['$scope', 'l10n', '$http', function($scope, l10n, $http) {
+  .controller('registerCtrl', ['$scope', 'l10n', '$http', 'toaster', function($scope, l10n, $http, toaster) {
     l10n.setLocale($scope.$parent.language.locale);
     $scope.login = "";
     $scope.password = "";
@@ -76,20 +69,20 @@ angular.module('test.controllers', [])
     $scope.surname = "";
     $scope.patronymic = "";
     $scope.register = function() {
+      if($scope.login.length < 6) {
+        toaster.pop('warning', "Помилка", "Логін має містити щонайменше 6 символів.");
+        return;
+      }
       if($scope.password != $scope.confirm) {
-
+        toaster.pop('warning', "Помилка", "Невірно введено повторення паролю.");
         return;
       }
       if($scope.password.length < 6) {
-
-        return;
-      }
-      if($scope.login.length < 6) {
-
+        toaster.pop('warning', "Помилка", "Пароль має містити щонайменше 6 символів.");
         return;
       }
       if($scope.email == undefined || !$scope.email) {
-
+        toaster.pop('warning', "Помилка", "Некорректно вказано e-mail адресу.");
         return;
       }
       var params = {
@@ -103,15 +96,15 @@ angular.module('test.controllers', [])
       $http.post("/register", params)
         .then(function(data) {
           if(data.data.success) {
-            alert(data.data.data.name + " " + data.data.data.surname);
+            toaster.pop('success', "Привіт, " + data.data.data.name + " " + data.data.data.surname, "Ласкаво просимо до системи тестування test-system.");
             sessionStorage['user'] = JSON.stringify(data.data.data);
             location.reload();
           }
           else
-            alert("Error!");
+            toaster.pop('error', "Помилка", "Повторіть спробу пізніше.");
       },
       function() {
-        alert("Error.");
+        toaster.pop('error', "Помилка", "Повторіть спробу пізніше.");
       });
     }
   }])

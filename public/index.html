@@ -7,6 +7,8 @@
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css" />
     <link rel="stylesheet" type="text/css" href="css/jumbotron-narrow.css" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-datepicker.css" />
+    <link rel="stylesheet" type="text/css" href="css/toaster.css" />
     <link rel="stylesheet" type="text/css" href="css/logo.css" />
     <link rel="stylesheet" type="text/css" href="css/app.css" />
   </head>
@@ -42,6 +44,7 @@
           <span></span>
         </h2>
       </div>
+      <toaster-container> </toaster-container>
       <div ng-view></div>
       <div class="footer">
         <p>© DHARMA 2013</p>
@@ -86,16 +89,14 @@
       </nav>
       <div class="container container-max-width container-top-padding">
         <div ng-if="page.indexOf('/test') == -1" class="row">
-          <div class="col-md-8">
+          <div class="col-md-9">
             <div ng-view></div>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-3">
             <div>
               <h4><i class="icon-calendar4"></i>&nbsp;Calendar</h4>
               <hr>
-              <div ng-model="dt">
-                <datepicker starting-day="1" show-weeks="true"></datepicker>
-              </div>
+              <div data-date-format="dd.mm.yyyy" data-date-language="uk" data-date-weekStart="1" data-date-calendar-weeks="true" data-date-today-highlight="true" bs-datepicker></div>
             </div>
             <div ng-if="page == '/' || page.indexOf('/category') == 0">
               <h4><i class="icon-search3"></i>&nbsp;Filter</h4>
@@ -120,7 +121,11 @@
   <script type="text/javascript" src="lib/angular/angular.min.js"></script>
   <script type="text/javascript" src="lib/angular/angular-route.js"></script>
   <script type="text/javascript" src="lib/bootstrap.min.js"></script>
+  <script type="text/javascript" src="lib/bootstrap-datepicker.js"></script>
+  <script type="text/javascript" src="lib/angular-strap.min.js"></script>
   <script type="text/javascript" src="lib/ui-bootstrap-tpls-0.7.0.min.js"></script>
+  <script type="text/javascript" src="lib/angular-animate.min.js"></script>
+  <script type="text/javascript" src="lib/toaster.js"></script>
   <script type="text/javascript" src="lib/l10n.min.js"></script>
   <script type="text/javascript" src="lib/l10n-with-tools.min.js"></script>
   <script type="text/javascript" src="locale/languages.js"></script>

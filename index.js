@@ -2,6 +2,7 @@
 
 var query = require('./js/query.js');
 var express = require('express');
+var async = require('async');
 var app = express();
 
 app.use(express.json())
@@ -41,20 +42,32 @@ app.use(express.json())
   })
   .get('/questions/:test', function(req, res) {
     query('SELECT * FROM "questions" WHERE "test_id" = ' + req.params.test + ' ORDER BY "order", "id";', function(data) {
-      for(var i = 0; i < data.length;) {
-        query('SELECT * FROM "answers" WHERE "question_id" = ' + data[i].id + ' ORDER BY "order", "id";', function(answers) {
-          /*data[i].answers = new Array(answers.length);
-          for(var j = 0; j < answers.length; j++) {
-            delete answers[j].points;
-            data[i].answers[j] = answers[j]
-          }
-          console.log(answers);*/
-          console.log(data[i]);
-        });
-        data[i].number = ++i;
-      }
-      //console.log(data);
-      res.json({data : data});
+      var b = [];
+      var answ = [];
+      var rslt = [];
+      for(var i = 0; i < data.length; i++)
+        if(data[i].type == 'radio' || data[i].type == 'checkbox')
+          b.push(function(k, callback) {
+            query('SELECT * FROM "answers" WHERE "question_id" = ' + data[k].id + ' ORDER BY "order", "id";', function(answers) {
+              for(var j = 0; j < answers.length; j++) {
+                delete answers[j].points;
+                answers[j].result = false;
+              }
+              answ.push(answers);
+              callback(undefined);
+            }
+          )}.bind(this, i));
+      async.waterfall(b, function(err, result) {
+        for(var i = 0; i < data.length; i++) {
+          data[i].number = i + 1;
+          data[i].answers = answ[i];
+          if(data[i].type == 'text' || data[i].type == 'textarea')
+            data[i].result = '';
+          else
+            data[i].answers = answ[i];
+        }
+        res.json({data : data});
+      });
     });
   })
   .post('/login', function(req, res) {

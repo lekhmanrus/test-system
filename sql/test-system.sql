@@ -81,6 +81,7 @@ CREATE TABLE "public"."questions" (
 "id" SERIAL NOT NULL,
 "test_id" int4,
 "title" text COLLATE "default",
+"type" text COLLATE "default",
 "order" int4
 )
 WITH (OIDS=FALSE)
@@ -90,11 +91,11 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 -- Records of questions
 -- ----------------------------
-INSERT INTO "public"."questions" ("test_id", "title", "order") VALUES ('1', '1 question', '0');
-INSERT INTO "public"."questions" ("test_id", "title", "order") VALUES ('1', '2 question', '10');
-INSERT INTO "public"."questions" ("test_id", "title", "order") VALUES ('1', '3 question', '20');
-INSERT INTO "public"."questions" ("test_id", "title", "order") VALUES ('1', '4 question', '30');
-INSERT INTO "public"."questions" ("test_id", "title", "order") VALUES ('1', '5 question', '40');
+INSERT INTO "public"."questions" ("test_id", "title", "type", "order") VALUES ('1', '1 question', 'checkbox', '0');
+INSERT INTO "public"."questions" ("test_id", "title", "type", "order") VALUES ('1', '2 question', 'radio', '10');
+INSERT INTO "public"."questions" ("test_id", "title", "type", "order") VALUES ('1', '3 question', 'text', '20');
+INSERT INTO "public"."questions" ("test_id", "title", "type", "order") VALUES ('1', '4 question', 'textarea', '30');
+INSERT INTO "public"."questions" ("test_id", "title", "type", "order") VALUES ('1', '5 question', 'checkbox', '40');
 
 -- ----------------------------
 -- Table structure for results

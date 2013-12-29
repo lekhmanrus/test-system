@@ -9,7 +9,10 @@ angular.module('test.languages', ['l10n', 'l10n-tools']).config(['l10nProvider',
       us: 'Англійська',
       signout: 'Вихід',
       test: 'Тести',
-      'btn-about-text': 'DHARMA - команда професійних програмістів, що займаються розробкою програмних продуктів для багатьох сфер діяльності. Серед них продукти різної складності: від невеликих прикладних програм до складних програмних комплексів і клієнт-серверних додатків. За допомогою наших знань, ми хочемо зробити Ваше життя комфортнішим, а бізнес - прибутковішим. Довірте нам рішення своїх IT-задач, і ми розробимо програму Вашого майбутнього!'
+      'btn-about-text': 'DHARMA - команда професійних програмістів, що займаються розробкою програмних продуктів для багатьох сфер діяльності. Серед них продукти різної складності: від невеликих прикладних програм до складних програмних комплексів і клієнт-серверних додатків. За допомогою наших знань, ми хочемо зробити Ваше життя комфортнішим, а бізнес - прибутковішим. Довірте нам рішення своїх IT-задач, і ми розробимо програму Вашого майбутнього!',
+      error: 'Помилка',
+      'error-attempt': 'Повторіть спробу пізніше.',
+      'error-auth': 'З Вашим обліковим записом виникли проблеми. Повторіть спробу пізніше.'
     },
     login: {
       auth: 'Будь ласка, авторизуйтесь у системі',
@@ -28,7 +31,10 @@ angular.module('test.languages', ['l10n', 'l10n-tools']).config(['l10nProvider',
       sub5: 'Швидкодія',
       text5: 'Програмний продукт не потребує для своєї роботи великої кількості апаратних ресурсів, що дозволяє використовувати його навіть на застарілому обладнанні.',
       sub6: 'Ліцензоване ПЗ',
-      text6: 'Користувач отримує програмне забезпечення разом із ліцензією, яка надає йому право використовувати програмний продукт за умови виконання положень ліцензування.'
+      text6: 'Користувач отримує програмне забезпечення разом із ліцензією, яка надає йому право використовувати програмний продукт за умови виконання положень ліцензування.',
+      error: 'Помилка',
+      'error-attempt': 'Повторіть спробу пізніше.',
+      'error-log-pass': 'Введений логін та/або пароль невірні. Спробуйте ще раз.'
     },
     registration:  {
       signin: 'Логін',
@@ -45,7 +51,15 @@ angular.module('test.languages', ['l10n', 'l10n-tools']).config(['l10nProvider',
       'surname-help': 'Прізвище',
       'patronymic-help': 'По батькові',
       'e-mail-help': 'E-mail адреса',
-      register: 'Зареєструватись'
+      register: 'Зареєструватись',
+      error: 'Помилка',
+      'error-attempt': 'Повторіть спробу пізніше.',
+      'error-log-lenght': 'Логін має містити щонайменше 6 символів.',
+      'error-pass-repeat': 'Невірно введено повторення паролю.',
+      'error-pass-lenght': 'Пароль має містити щонайменше 6 символів.',
+      'error-email': 'Некоректно вказано e-mail адресу.',
+      hello: 'Привіт, ',
+      'hello-msg': 'Ласкаво просимо до системи тестування test-system.'
     },
     about:  {
       'header-big': 'Про',
@@ -63,7 +77,10 @@ angular.module('test.languages', ['l10n', 'l10n-tools']).config(['l10nProvider',
       us: 'Английский',
       signout: 'Выход',
       test: 'Тесты',
-      'btn-about-text': 'DHARMA - команда профессиональных программистов, занимающихся разработкой программных продуктов для многих сфер деятельности. Среди них продукты различной сложности: от небольших прикладных программ до сложных программных комплексов и клиент-серверных приложений. С помощью наших знаний, мы хотим сделать Вашу жизнь комфортнее, а бизнес – прибыльнее. Доверьте нам решение своих IT-задач, и мы разработаем программу Вашего будущего!'
+      'btn-about-text': 'DHARMA - команда профессиональных программистов, занимающихся разработкой программных продуктов для многих сфер деятельности. Среди них продукты различной сложности: от небольших прикладных программ до сложных программных комплексов и клиент-серверных приложений. С помощью наших знаний, мы хотим сделать Вашу жизнь комфортнее, а бизнес – прибыльнее. Доверьте нам решение своих IT-задач, и мы разработаем программу Вашего будущего!',
+       error: 'Ошибка',
+      'error-attempt': 'Попробуйте позже.',
+      'error-auth': 'С вашей учетной записью возникли проблемы. Попробуйте позже.'
     },
     login: {
       auth: 'Пожалуйста, авторизируйтесь в системе',
@@ -82,7 +99,10 @@ angular.module('test.languages', ['l10n', 'l10n-tools']).config(['l10nProvider',
       sub5: 'Быстродействие',
       text5: 'Программный продукт не требует для своей работы большого количества аппаратных ресурсов, что позволяет использовать его даже на устаревшем оборудовании.',
       sub6: 'Лицензионное ПО',
-      text6: 'Пользователь получает программное обеспечение вместе с лицензией, которая дает ему право использовать программный продукт при условии выполнения положений лицензирования.'
+      text6: 'Пользователь получает программное обеспечение вместе с лицензией, которая дает ему право использовать программный продукт при условии выполнения положений лицензирования.',
+      error: 'Ошибка',
+      'error-attempt': 'Попробуйте позже.',
+      'error-log-pass': 'Введенный логин и / или пароль неверны. Попробуйте еще ​​раз.'
     },
     registration:  {
       signin: 'Логин',
@@ -99,7 +119,15 @@ angular.module('test.languages', ['l10n', 'l10n-tools']).config(['l10nProvider',
       'surname-help': 'Фамилия',
       'patronymic-help': 'Отчество',
       'e-mail-help': 'E-mail адресс',
-      register: 'Зарегистрироваться'
+      register: 'Зарегистрироваться',
+      error: 'Ошибка',
+      'error-attempt': 'Попробуйте позже.',
+      'error-log-lenght': 'Логин должен содержать не менее 6 символов.',
+      'error-pass-repeat': 'Неверно введено повторение пароля.',
+      'error-pass-lenght': 'Пароль должен содержать не менее 6 символов.',
+      'error-email': 'Некорректно указано e-mail адрес.',
+      hello: 'Привет, ',
+      'hello-msg': 'Добро пожаловать в систему тестирования test-system.'
     },
     about:  {
       'header-big': 'О',
@@ -117,7 +145,10 @@ angular.module('test.languages', ['l10n', 'l10n-tools']).config(['l10nProvider',
       us: 'English',
       signout: 'Logout',
       test: 'Test',
-      'btn-about-text': 'DHARMA - a team of professional programmers developing software for many spheres of activity. Among them are products of varying complexity, from small applications to complex software systems and client-server applications. With our knowledge, we want to make your life more comfortable, and business - profitable. Entrust us with their IT-tasks, and we will develop a program for your future!'
+      'btn-about-text': 'DHARMA - a team of professional programmers developing software for many spheres of activity. Among them are products of varying complexity, from small applications to complex software systems and client-server applications. With our knowledge, we want to make your life more comfortable, and business - profitable. Entrust us with their IT-tasks, and we will develop a program for your future!',
+      error: 'Error',
+      'error-attempt': 'Please try again later.',
+      'error-auth': 'There are problems with your account. Please try again later.'
     },
     login: {
       auth: 'Please sign in',
@@ -136,7 +167,10 @@ angular.module('test.languages', ['l10n', 'l10n-tools']).config(['l10nProvider',
       sub5: 'Performance',
       text5: 'The software does not need to have been running a lot of hardware resources, it can be used even on older hardware.',
       sub6: 'License software',
-      text6: 'The user receives the software with a license that allows him to use the software subject to the provisions of the license.'
+      text6: 'The user receives the software with a license that allows him to use the software subject to the provisions of the license.',
+      error: 'Error',
+      'error-attempt': 'Please try again later.',
+      'error-log-pass': 'Entered username and / or password is incorrect. Please try again later.'
     },
     registration:  {
       signin: 'Login',
@@ -153,7 +187,15 @@ angular.module('test.languages', ['l10n', 'l10n-tools']).config(['l10nProvider',
       'surname-help': 'Second name',
       'patronymic-help': 'Patronymic',
       'e-mail-help': 'E-mail address',
-      register: 'Register'
+      register: 'Register',
+      error: 'Error',
+      'error-attempt': 'Please try again later.',
+      'error-log-lenght': 'Username must be at least 6 characters.',
+      'error-pass-repeat': 'Password repeat is typed incorrectly.',
+      'error-pass-lenght': 'Password must be at least 6 characters.',
+      'error-email': 'E-mail is typed incorrectly.',
+      hello: 'Hello, ',
+      'hello-msg': 'Welcome to the test-system.'
     },
     about:  {
       'header-big': 'About',

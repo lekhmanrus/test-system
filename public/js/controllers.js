@@ -32,12 +32,12 @@ angular.module('test.controllers', [])
             sessionStorage['user'] = JSON.stringify(data.data.data);
           }
           else {
-            toaster.pop('error', "Помилка", "З Вашим обліковим записом виникли проблеми. Повторіть спробу пізніше.");
+            toaster.pop('error', l10n.get('main.error'), l10n.get('main.error-auth'));
             $scope.loginFlag = false;
           }
         },
         function() {
-          toaster.pop('error', "Помилка", "Повторіть спробу пізніше.");
+          toaster.pop('error', l10n.get('main.error'), l10n.get('main.error-attempt'));
         });
     }
     
@@ -74,11 +74,11 @@ angular.module('test.controllers', [])
             location.reload();
           }
           else
-            toaster.pop('error', "Помилка", "Введений логін та/або пароль невірні. Спробуйте ще раз.");
+            toaster.pop('error', l10n.get('login.error'), l10n.get('login.error-log-pass'));
           $scope.$parent.loading = false;
         },
         function() {
-          toaster.pop('error', "Помилка", "Повторіть спробу пізніше.");
+          toaster.pop('error', l10n.get('login.error'), l10n.get('login.error-attempt'));
           $scope.$parent.loading = false;
         });
     }
@@ -95,22 +95,22 @@ angular.module('test.controllers', [])
     $scope.register = function() {
       $scope.$parent.loading = true;
       if($scope.login.length < 6) {
-        toaster.pop('warning', "Помилка", "Логін має містити щонайменше 6 символів.");
+        toaster.pop('warning', l10n.get('registration.error'), l10n.get('registration.error-log-lenght'));
         $scope.$parent.loading = false;
         return;
       }
       if($scope.password != $scope.confirm) {
-        toaster.pop('warning', "Помилка", "Невірно введено повторення паролю.");
+        toaster.pop('warning', l10n.get('registration.error'), l10n.get('registration.error-pass-repeat'));
         $scope.$parent.loading = false;
         return;
       }
       if($scope.password.length < 6) {
-        toaster.pop('warning', "Помилка", "Пароль має містити щонайменше 6 символів.");
+        toaster.pop('warning', l10n.get('registration.error'), l10n.get('registration.error-pass-lenght'));
         $scope.$parent.loading = false;
         return;
       }
       if($scope.email == undefined || !$scope.email) {
-        toaster.pop('warning', "Помилка", "Некорректно вказано e-mail адресу.");
+        toaster.pop('warning', l10n.get('registration.error'), l10n.get('registration.error-email'));
         $scope.$parent.loading = false;
         return;
       }
@@ -125,16 +125,16 @@ angular.module('test.controllers', [])
       $http.post("/register", params)
         .then(function(data) {
           if(data.data.success) {
-            toaster.pop('success', "Привіт, " + data.data.data.name + " " + data.data.data.surname, "Ласкаво просимо до системи тестування test-system.");
+            toaster.pop('success', l10n.get('registration.hello') + data.data.data.name + " " + data.data.data.surname, l10n.get('registration.hello-msg'));
             sessionStorage['user'] = JSON.stringify(data.data.data);
             location.reload();
           }
           else
-            toaster.pop('error', "Помилка", "Повторіть спробу пізніше.");
+            toaster.pop('error', l10n.get('registration.error'), l10n.get('registration.error-attempt'));
           $scope.$parent.loading = false;
       },
       function() {
-        toaster.pop('error', "Помилка", "Повторіть спробу пізніше.");
+        toaster.pop('error', l10n.get('registration.error'), l10n.get('registration.error-attempt'));
         $scope.$parent.loading = false;
       });
     }

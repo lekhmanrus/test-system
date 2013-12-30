@@ -1,1 +1,53 @@
-Add User Partial
+<title>Add user</title>
+<div class="page-header">
+  <h1><span>Add</span>&nbsp;<small>user</small></h1>
+</div>
+<form class="form-horizontal" role="form">
+  <div class="form-group">
+    <label for="input-login" class="col-sm-3 control-label" l10n-text="registration.signin"></label>
+    <div class="col-sm-9">
+      <input type="text" ng-model="login" class="form-control" id="input-login" l10n-placeholder="registration.signin-help" required autofocus />
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="input-password" class="col-sm-3 control-label" l10n-text="registration.pass"></label>
+    <div class="col-sm-9">
+      <input type="password" ng-model="password" class="form-control" id="input-password" l10n-placeholder="registration.pass-help" required />
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="input-email" class="col-sm-3 control-label" l10n-text="registration.e-mail"></label>
+    <div class="col-sm-9">
+      <input type="email" ng-model="email" class="form-control" id="input-email" l10n-placeholder="registration.e-mail-help" />
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="input-name" class="col-sm-3 control-label" l10n-text="registration.name"></label>
+    <div class="col-sm-9">
+      <input type="text" ng-model="name" class="form-control" id="input-name" l10n-placeholder="registration.name-help" />
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="input-surname" class="col-sm-3 control-label" l10n-text="registration.surname"></label>
+    <div class="col-sm-9">
+      <input type="text" ng-model="surname" class="form-control" id="input-surname" l10n-placeholder="registration.surname-help" />
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="input-patronymic" class="col-sm-3 control-label" l10n-text="registration.patronymic"></label>
+    <div class="col-sm-9">
+      <input type="text" ng-model="patronymic" class="form-control" id="input-patronymic" l10n-placeholder="registration.patronymic-help" />
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="input-rights" class="col-sm-3 control-label">Rights</label>
+    <div class="col-sm-9">
+      <input type="number" ng-model="rights" class="form-control" id="input-rights" placeholder="User rights"/>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-3 col-sm-9">
+      <button type="submit" class="btn btn-lg btn-primary btn-block" ng-click="addUser()">Add user</button>
+    </div>
+  </div>
+</form>

@@ -144,5 +144,16 @@ app.use(express.json())
       }
     });
   })
+  .post('/adduser', function(req, res) {
+    query("SELECT * FROM users WHERE login = '" + req.body.login + "' LIMIT 1;", function(data) {
+      if(data.length != 0) {
+        res.json({success : false});
+        return;
+      }
+      query("INSERT INTO users (login, password, email, name, surname, patronymic, rights) VALUES ('" + req.body.login + "', '" + req.body.password + "', '" + req.body.email + "', '" + req.body.name + "', '" + req.body.surname + "', '" + req.body.patronymic + "', '" + req.body.rights + "');", function(data) {
+        res.json({success : true});
+      });
+    });
+  })
   .use(express.static(__dirname + '/public'))
   .listen(process.env.PORT || 8888);

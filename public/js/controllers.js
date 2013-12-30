@@ -264,8 +264,40 @@ angular.module('test.controllers', [])
         $scope.valueNow = 0;
     }
   }])
-  .controller('addUserCtrl', ['$scope', 'l10n', function($scope, l10n) {
+  .controller('addUserCtrl', ['$scope', 'l10n', '$http', 'toaster', function($scope, l10n, $http, toaster) {
     l10n.setLocale($scope.$parent.language.locale);
+    $scope.login = "";
+    $scope.password = "";
+    $scope.confirm = "";
+    $scope.email = "";
+    $scope.name = "";
+    $scope.surname = "";
+    $scope.patronymic = "";
+    $scope.rights = 1;
+    $scope.addUser = function() {
+      $scope.$parent.loading = true;
+      var params = {
+        login : $scope.login, 
+        password : $scope.password,
+        email : $scope.email,
+        name : $scope.name,
+        surname : $scope.surname,
+        patronymic : $scope.patronymic,
+        rights : $scope.rights
+      };
+      $http.post("/adduser", params)
+        .then(function(data) {
+          if(data.data.success)
+            toaster.pop('success', "Успішно", "Користувач <strong><u>" + $scope.login + "</u></strong> був успішно створений. <br /> Пароль: <strong><u>" + $scope.password + '</u><strong>.');
+          else
+            toaster.pop('error', l10n.get('registration.error'), "Користвуач з таким логіном вже існує.");
+          $scope.$parent.loading = false;
+      },
+      function() {
+        toaster.pop('error', l10n.get('registration.error'), l10n.get('registration.error-attempt'));
+        $scope.$parent.loading = false;
+      });
+    }
   }])
   .controller('editUserCtrl', ['$scope', 'l10n', function($scope, l10n) {
     l10n.setLocale($scope.$parent.language.locale);

@@ -14,6 +14,7 @@
     <link rel="stylesheet" type="text/css" href="css/app.css" />
   </head>
   <body ng-controller="mainCtrl">
+    <toaster-container> </toaster-container>
     <div ng-if="!loginFlag" class="container container-max-width">
       <div class="header">
         <ul class="nav nav-pills pull-right">
@@ -45,7 +46,6 @@
           <span></span>
         </h2>
       </div>
-      <toaster-container> </toaster-container>
       <div ng-view></div>
       <div class="footer">
         <p>© DHARMA 2013</p>

@@ -232,6 +232,7 @@ WITH (OIDS=FALSE)
 -- Records of users
 -- ----------------------------
 INSERT INTO "public"."users" ("login", "password", "name", "surname", "patronymic", "rights", "email") VALUES ('lekhmanrus', '7777777', 'Ruslan', 'Lekhman', 'Vitaliyevych', '0', 'lekhman-ruslan@i.ua');
+INSERT INTO "public"."users" ("login", "password", "name", "surname", "patronymic", "rights", "email") VALUES ('wishmaster', '7777777', 'Sergei', 'Bliznyuk', 'Igorevich', '0', 'bliznyuk_sergei@mail.ru');
 
 -- ----------------------------
 -- Table structure for users_rights

@@ -14,7 +14,12 @@
     <input ng-model="question.result" ng-change="change(question.id)" ng-if="question.type == 'text'" name="q{{question.id}}" class="form-control" type="{{question.type}}" placeholder="Write your answer there" />
     <textarea ng-model="question.result" ng-change="change(question.id)" rows="7" ng-if="question.type == 'textarea'" name="q{{question.id}}" class="form-control" placeholder="Write your answer there"></textarea>
   </tab>
-  <tab ng-if="" heading="ee">d</tab>
+  <tab class="commit-tab" ng-if="answered == questions.length" heading="Commit">
+    <center>
+      <h3>You are sure?</h3>
+      <button class="btn btn-lg btn-primary" type="submit" ng-click="commit()">Yes, rate me!</button>
+    </center>
+  </tab>
 </tabset>
 <div class="clearfix"></div>
 <br />

@@ -18,6 +18,7 @@ angular.module('test.controllers', [])
       location.reload();
       $scope.loading = false;
     }
+    $scope.search = {q : ""};
     $scope.loading = false;
     $scope.loginFlag = false;
     $scope.actions = undefined;
@@ -147,6 +148,7 @@ angular.module('test.controllers', [])
   }])
   .controller('categoriesCtrl', ['$scope', '$timeout', 'l10n', function($scope, $timeout, l10n) {
     l10n.setLocale($scope.$parent.language.locale);
+    $scope.$parent.search.q = "";
     $scope.$parent.loading = true;
     $scope.categories = [];
     $.get("/categories", function(data) {
@@ -158,6 +160,7 @@ angular.module('test.controllers', [])
   }])
   .controller('subcategoriesCtrl', ['$scope', '$timeout', '$routeParams', 'l10n', function($scope, $timeout, $routeParams, l10n) {
     l10n.setLocale($scope.$parent.language.locale);
+    $scope.$parent.search.q = "";
     $scope.$parent.loading = true;
     $scope.category = $routeParams.category;
     $scope.subcategories = [];
@@ -175,6 +178,7 @@ angular.module('test.controllers', [])
   }])
   .controller('testsCtrl', ['$scope', '$timeout', '$routeParams', 'l10n', function($scope, $timeout, $routeParams, l10n) {
     l10n.setLocale($scope.$parent.language.locale);
+    $scope.$parent.search.q = "";
     $scope.$parent.loading = true;
     $scope.category = $routeParams.category;
     $scope.subcategory = $routeParams.subcategory;
@@ -288,7 +292,7 @@ angular.module('test.controllers', [])
       $http.post("/adduser", params)
         .then(function(data) {
           if(data.data.success)
-            toaster.pop('success', "Успішно", "Користувач <strong><u>" + $scope.login + "</u></strong> був успішно створений. <br /> Пароль: <strong><u>" + $scope.password + '</u><strong>.');
+            toaster.pop('success', "Успішно", "Користувач <strong><u>" + $scope.login + "</u></strong> був успішно створений. <br /> Пароль: <strong><u>" + $scope.password + '</u><strong>.', null, 'trustedHtml');
           else
             toaster.pop('error', l10n.get('registration.error'), "Користвуач з таким логіном вже існує.");
           $scope.$parent.loading = false;

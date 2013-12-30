@@ -8,7 +8,7 @@
 <hr>
 <div ng-if="tests.length <= 0">Tests not found.</div>
 <div ng-if="tests.length > 0" class="list-group">
-  <a ng-repeat="test in tests" href="#/category/{{category.id}}/{{subcategory.id}}/test/{{test.id}}" class="list-group-item">
+  <a ng-repeat="test in tests | filter : {title : search.q}" href="#/category/{{category.id}}/{{subcategory.id}}/test/{{test.id}}" class="list-group-item">
     <h4 class="list-group-item-heading">{{test.title}}</h4>
     <p class="list-group-item-text">{{test.description}}</p>
   </a>

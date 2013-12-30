@@ -6,5 +6,5 @@
 <hr>
 <div ng-if="categories.length <= 0">Categories not found.</div>
 <div ng-if="categories.length > 0" class="list-group">
-  <a ng-repeat="category in categories" href="#/category/{{category.id}}" class="list-group-item">{{category.title}}</a>
+  <a ng-repeat="category in categories | filter : {title : search.q}" href="#/category/{{category.id}}" class="list-group-item">{{category.title}}</a>
 </div>

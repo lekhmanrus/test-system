@@ -7,5 +7,5 @@
 <hr>
 <div ng-if="subcategories.length <= 0">Subcategories not found.</div>
 <div ng-if="subcategories.length > 0" class="list-group">
-  <a ng-repeat="subcategory in subcategories" href="#/category/{{category.id}}/{{subcategory.id}}" class="list-group-item">{{subcategory.title}}</a>
+  <a ng-repeat="subcategory in subcategories | filter : {title : search.q}" href="#/category/{{category.id}}/{{subcategory.id}}" class="list-group-item">{{subcategory.title}}</a>
 </div>

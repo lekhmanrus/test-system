@@ -105,14 +105,14 @@
           </div>
           <div ng-if="actions">
             <div class="col-md-2"></div>
-            <div ng-if="page.indexOf('/admin') >= 0" class="col-md-7">
+            <div ng-if="page.indexOf('/admin') == -1" class="col-md-7">
               <div ng-view></div>
             </div>
-            <div ng-if="page.indexOf('/admin') == -1" class="col-md-10">
+            <div ng-if="page.indexOf('/admin') >= 0" class="col-md-10">
               <div ng-view></div>
             </div>
           </div>
-          <div ng-if="page.indexOf('/admin') >= 0" class="col-md-3">
+          <div ng-if="page.indexOf('/admin') == -1" class="col-md-3">
             <div>
               <h4><i class="icon-calendar4"></i>&nbsp;Calendar</h4>
               <hr>
@@ -121,7 +121,7 @@
             <div ng-if="page == '/' || page.indexOf('/category') == 0">
               <h4><i class="icon-search3"></i>&nbsp;Filter</h4>
               <hr>
-              <input type="text" class="form-control" name="query" id="query" placeholder="Start typing something to search...">
+              <input type="text" ng-model="search.q" class="form-control" name="query" id="query" placeholder="Start typing something to search..." />
             </div>
           </div>
         </div>

@@ -82,6 +82,7 @@ CREATE TABLE "public"."questions" (
 "test_id" int4,
 "title" text COLLATE "default",
 "type" text COLLATE "default",
+"max_points" int4 NOT NULL,
 "order" int4
 )
 WITH (OIDS=FALSE)
@@ -91,11 +92,11 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 -- Records of questions
 -- ----------------------------
-INSERT INTO "public"."questions" ("test_id", "title", "type", "order") VALUES ('1', '1 question', 'checkbox', '0');
-INSERT INTO "public"."questions" ("test_id", "title", "type", "order") VALUES ('1', '2 question', 'radio', '10');
-INSERT INTO "public"."questions" ("test_id", "title", "type", "order") VALUES ('1', '3 question', 'text', '20');
-INSERT INTO "public"."questions" ("test_id", "title", "type", "order") VALUES ('1', '4 question', 'textarea', '30');
-INSERT INTO "public"."questions" ("test_id", "title", "type", "order") VALUES ('1', '5 question', 'checkbox', '40');
+INSERT INTO "public"."questions" ("test_id", "title", "type", "order", "max_points") VALUES ('1', '1 question', 'checkbox', '0', '3');
+INSERT INTO "public"."questions" ("test_id", "title", "type", "order", "max_points") VALUES ('1', '2 question', 'radio', '10', '2');
+INSERT INTO "public"."questions" ("test_id", "title", "type", "order", "max_points") VALUES ('1', '3 question', 'text', '20', '5');
+INSERT INTO "public"."questions" ("test_id", "title", "type", "order", "max_points") VALUES ('1', '4 question', 'textarea', '30', '10');
+INSERT INTO "public"."questions" ("test_id", "title", "type", "order", "max_points") VALUES ('1', '5 question', 'checkbox', '40', '2');
 
 -- ----------------------------
 -- Table structure for results
@@ -268,6 +269,86 @@ INSERT INTO "public"."users_rights" ("right_id", "user_rights") VALUES ('15', '0
 INSERT INTO "public"."users_rights" ("right_id", "user_rights") VALUES ('16', '0');
 
 -- ----------------------------
+-- Table structure for users_answers_radio_checkbox
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."users_answers_radio_checkbox";
+CREATE TABLE "public"."users_answers_radio_checkbox" (
+"id" SERIAL NOT NULL,
+"user_id" int4 NOT NULL,
+"question_id" int4 NOT NULL,
+"answer_id" int4 NOT NULL
+)
+WITH (OIDS=FALSE)
+
+;
+
+-- ----------------------------
+-- Records of users_answers_radio_checkbox
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for users_answers_text
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."users_answers_text";
+CREATE TABLE "public"."users_answers_text" (
+"id" SERIAL NOT NULL,
+"user_id" int4 NOT NULL,
+"question_id" int4 NOT NULL,
+"points" int2 DEFAULT 0 NOT NULL,
+"answer" varchar(255) COLLATE "default"
+)
+WITH (OIDS=FALSE)
+
+;
+
+-- ----------------------------
+-- Records of users_answers_text
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for users_answers_textarea
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."users_answers_textarea";
+CREATE TABLE "public"."users_answers_textarea" (
+"id" SERIAL NOT NULL,
+"user_id" int4 NOT NULL,
+"question_id" int4 NOT NULL,
+"points" int2 DEFAULT 0 NOT NULL,
+"answer" text COLLATE "default"
+)
+WITH (OIDS=FALSE)
+
+;
+
+-- ----------------------------
+-- Records of users_answers_textarea
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for users_tests
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."users_tests";
+CREATE TABLE "public"."users_tests" (
+"id" SERIAL NOT NULL,
+"user_id" int4 NOT NULL,
+"test_id" int4 NOT NULL,
+"enabled" bool DEFAULT true NOT NULL,
+"passed" bool DEFAULT false NOT NULL
+)
+WITH (OIDS=FALSE)
+
+;
+
+-- ----------------------------
+-- Records of users_tests
+-- ----------------------------
+INSERT INTO "public"."users_tests" ("user_id", "test_id", "enabled", "passed") VALUES ('1', '1', 't', 'f');
+INSERT INTO "public"."users_tests" ("user_id", "test_id", "enabled", "passed") VALUES ('1', '2', 't', 'f');
+INSERT INTO "public"."users_tests" ("user_id", "test_id", "enabled", "passed") VALUES ('1', '3', 't', 'f');
+INSERT INTO "public"."users_tests" ("user_id", "test_id", "enabled", "passed") VALUES ('2', '2', 't', 'f');
+INSERT INTO "public"."users_tests" ("user_id", "test_id", "enabled", "passed") VALUES ('2', '3', 't', 'f');
+
+-- ----------------------------
 -- Primary Key structure for table answers
 -- ----------------------------
 ALTER TABLE "public"."answers" ADD PRIMARY KEY ("id");
@@ -311,3 +392,23 @@ ALTER TABLE "public"."users" ADD PRIMARY KEY ("id");
 -- Primary Key structure for table users_rights
 -- ----------------------------
 ALTER TABLE "public"."users_rights" ADD PRIMARY KEY ("id");
+
+-- ----------------------------
+-- Primary Key structure for table users_answers_radio_checkbox
+-- ----------------------------
+ALTER TABLE "public"."users_answers_radio_checkbox" ADD PRIMARY KEY ("id");
+
+-- ----------------------------
+-- Primary Key structure for table users_answers_text
+-- ----------------------------
+ALTER TABLE "public"."users_answers_text" ADD PRIMARY KEY ("id");
+
+-- ----------------------------
+-- Primary Key structure for table users_answers_textarea
+-- ----------------------------
+ALTER TABLE "public"."users_answers_textarea" ADD PRIMARY KEY ("id");
+
+-- ----------------------------
+-- Primary Key structure for table users_tests
+-- ----------------------------
+ALTER TABLE "public"."users_tests" ADD PRIMARY KEY ("id");

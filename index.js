@@ -35,8 +35,37 @@ app.use(express.json())
       res.json({data : data});
     });
   })
-  .get('/tests/:subcategory', function(req, res) {
-    query('SELECT * FROM "tests" WHERE "subcategory_id" = ' + req.params.subcategory + ' ORDER BY "order", "id";', function(data) {
+  .get('/tests/:subcategory/:uid', function(req, res) {
+    query('SELECT t.*, ut.passed, (SELECT SUM(max_points) FROM  questions WHERE test_id = t.id) max_points FROM users_tests ut LEFT JOIN tests t ON ut.test_id = t.id WHERE t.subcategory_id = ' + req.params.subcategory + ' AND ut.user_id = ' + req.params.uid + ' ORDER BY t."order", t."id";', function(data) {
+      var b = [];
+      var answ = [];
+      var rslt = [];
+      for(var i = 0; i < data.length; i++)
+        if(data[i].passed)
+          b.push(function(k, callback) {
+            query('SELECT * FROM "answers" WHERE "question_id" = ' + data[k].id + ' ORDER BY "order", "id";', function(answers) {
+              for(var j = 0; j < answers.length; j++) {
+                delete answers[j].points;
+                if(data[k].type == 'checkbox')
+                  answers[j].result = false;
+              }
+              answ.push(answers);
+              callback(undefined);
+            }
+          )}.bind(this, i));
+      async.waterfall(b, function(err, result) {
+        for(var i = 0, j = 0; i < data.length; i++) {
+          data[i].number = i + 1;
+          //data[i].answers = answ[i];
+          if(data[i].type == 'text' || data[i].type == 'textarea')
+            data[i].result = '';
+          else
+            data[i].answers = answ[j++];
+          if(data[i].type == 'radio')
+            data[i].result = '';
+        }
+        res.json({data : data});
+      });
       res.json({data : data});
     });
   })
@@ -71,6 +100,21 @@ app.use(express.json())
         }
         res.json({data : data});
       });
+    });
+  })
+  .post('/sendanswersradiocheckbox', function(req, res) {
+    query("INSERT INTO users_answers_radio_checkbox (user_id, question_id, answer_id) VALUES ('" + req.body.uid + "', '" + req.body.qid + "', '" + req.body.aid + "');", function(data) {
+      res.json({success : true});
+    });
+  })
+  .post('/sendanswerstext', function(req, res) {
+    query("INSERT INTO users_answers_" + req.body.qtype + " (user_id, question_id, answer) VALUES ('" + req.body.uid + "', '" + req.body.qid + "', '" + req.body.answer + "');", function(data) {
+      res.json({success : true});
+    });
+  })
+  .post('/disableandpasstest', function(req, res) {
+    query("UPDATE users_tests SET enabled = 'f', passed = 't' WHERE user_id = '" + req.body.uid + "' AND test_id = '" + req.body.tid + "';", function(data) {
+      res.json({success : true});
     });
   })
   .post('/login', function(req, res) {

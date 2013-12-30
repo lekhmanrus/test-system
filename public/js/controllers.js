@@ -193,14 +193,14 @@ angular.module('test.controllers', [])
         $scope.subcategory = data.data;
       });
     });
-    $.get("/tests/" +  $scope.subcategory, function(data) {
+    $.get("/tests/" +  $scope.subcategory + "/" + $scope.user.id, function(data) {
       $timeout(function() {
         $scope.tests = data.data;
         $scope.$parent.loading = false;
       });
     });
   }])
-  .controller('questionsCtrl', ['$scope', '$timeout', '$routeParams', 'l10n', function($scope, $timeout, $routeParams, l10n) {
+  .controller('questionsCtrl', ['$scope', '$timeout', '$routeParams', 'l10n', '$http', 'toaster', function($scope, $timeout, $routeParams, l10n, $http, toaster) {
     l10n.setLocale($scope.$parent.language.locale);
     $scope.$parent.loading = true;
     $scope.category = $routeParams.category;
@@ -266,6 +266,86 @@ angular.module('test.controllers', [])
         $scope.valueNow = 100;
       if($scope.valueNow < 0)
         $scope.valueNow = 0;
+    }
+    $scope.commit = function() {
+      if($scope.questions.length != $scope.answered)
+        return;
+      for(var i = 0; i < $scope.questions.length; i++) {
+        $scope.$parent.loading = true;
+        if($scope.questions[i].type == 'radio') {
+          if($scope.questions[i].result && $scope.questions[i].result.length > 0) {
+            var params = {
+              uid : $scope.$parent.user.id, 
+              qid : $scope.questions[i].id,
+              aid : $scope.questions[i].result
+            };
+            $http.post("/sendanswersradiocheckbox", params)
+              .then(function(data) {
+                if(!data.data.success)
+                  toaster.pop('error', l10n.get('registration.error'), "Сталася помилка. Повторіть спробу пізніше.");
+                $scope.$parent.loading = false;
+              },
+              function() {
+                toaster.pop('error', l10n.get('registration.error'), l10n.get('registration.error-attempt'));
+                $scope.$parent.loading = false;
+              });
+          }
+        }
+        else if($scope.questions[i].type == 'checkbox') {
+          for(var j = 0; j < $scope.questions[i].answers.length; j++)
+            if($scope.questions[i].answers[j].result) {
+              var params = {
+                uid : $scope.$parent.user.id, 
+                qid : $scope.questions[i].id,
+                aid : $scope.questions[i].answers[j].id
+              };
+              $http.post("/sendanswersradiocheckbox", params)
+                .then(function(data) {
+                  if(!data.data.success)
+                    toaster.pop('error', l10n.get('registration.error'), "Сталася помилка. Повторіть спробу пізніше.");
+                  $scope.$parent.loading = false;
+                },
+                function() {
+                  toaster.pop('error', l10n.get('registration.error'), l10n.get('registration.error-attempt'));
+                  $scope.$parent.loading = false;
+                });
+            }
+        }
+        else if($scope.questions[i].type == 'text' || $scope.questions[i].type == 'textarea')
+          if($scope.questions[i].result && $scope.questions[i].result.length > 0) {
+            var params = {
+              qtype : $scope.questions[i].type,
+              uid : $scope.$parent.user.id, 
+              qid : $scope.questions[i].id,
+              answer : $scope.questions[i].result
+            };
+            $http.post("/sendanswerstext", params)
+              .then(function(data) {
+                if(!data.data.success)
+                  toaster.pop('error', l10n.get('registration.error'), "Сталася помилка. Повторіть спробу пізніше.");
+                $scope.$parent.loading = false;
+              },
+              function() {
+                toaster.pop('error', l10n.get('registration.error'), l10n.get('registration.error-attempt'));
+                $scope.$parent.loading = false;
+              });
+          }
+      }
+      $scope.$parent.loading = true;
+      var params = {
+        uid : $scope.$parent.user.id, 
+        tid : $routeParams.test
+      };
+      $http.post("/disableandpasstest", params)
+        .then(function(data) {
+          if(!data.data.success)
+            toaster.pop('error', l10n.get('registration.error'), "Сталася помилка. Повторіть спробу пізніше.");
+          $scope.$parent.loading = false;
+        },
+        function() {
+          toaster.pop('error', l10n.get('registration.error'), l10n.get('registration.error-attempt'));
+          $scope.$parent.loading = false;
+        });
     }
   }])
   .controller('addUserCtrl', ['$scope', 'l10n', '$http', 'toaster', function($scope, l10n, $http, toaster) {

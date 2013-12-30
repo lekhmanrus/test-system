@@ -105,3 +105,10 @@ h2#logo, h2#logo span {
 .nav-tabs>li {
   cursor: pointer;
 }
+
+.datepicker table tr td.active,
+.datepicker table tr td.active:hover,
+.datepicker table tr td.active.disabled,
+.datepicker table tr td.active.disabled:hover {
+  color: #FFFFFF !important;
+}

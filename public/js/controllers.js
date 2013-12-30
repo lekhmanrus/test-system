@@ -196,6 +196,11 @@ angular.module('test.controllers', [])
     $.get("/tests/" +  $scope.subcategory + "/" + $scope.user.id, function(data) {
       $timeout(function() {
         $scope.tests = data.data;
+        for(var i = 0; i < $scope.tests.length; i++)
+          if($scope.tests[i].sum < 0)
+            $scope.tests[i].sum = 0;
+          else if($scope.tests[i].sum > $scope.tests[i].max_points)
+            $scope.tests[i].sum = $scope.tests[i].max_points;
         $scope.$parent.loading = false;
       });
     });

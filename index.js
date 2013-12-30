@@ -36,37 +36,42 @@ app.use(express.json())
     });
   })
   .get('/tests/:subcategory/:uid', function(req, res) {
+    //console.log('tra');
     query('SELECT t.*, ut.passed, (SELECT SUM(max_points) FROM  questions WHERE test_id = t.id) max_points FROM users_tests ut LEFT JOIN tests t ON ut.test_id = t.id WHERE t.subcategory_id = ' + req.params.subcategory + ' AND ut.user_id = ' + req.params.uid + ' ORDER BY t."order", t."id";', function(data) {
       var b = [];
       var answ = [];
       var rslt = [];
-      for(var i = 0; i < data.length; i++)
-        if(data[i].passed)
+      for(var i = 0; i < data.length; i++) {
+        data[i].sum = 0;
+        if(data[i].passed) {
           b.push(function(k, callback) {
-            query('SELECT * FROM "answers" WHERE "question_id" = ' + data[k].id + ' ORDER BY "order", "id";', function(answers) {
-              for(var j = 0; j < answers.length; j++) {
-                delete answers[j].points;
-                if(data[k].type == 'checkbox')
-                  answers[j].result = false;
-              }
-              answ.push(answers);
+            query('SELECT SUM(uat.points) AS s FROM users_answers_text uat LEFT JOIN questions q ON q.id = uat.question_id AND q.test_id = ' + data[k].id, function(answers) {
+              if(answers[0].s && parseInt(answers[0].s))
+                data[k].sum += parseInt(answers[0].s);
               callback(undefined);
             }
           )}.bind(this, i));
-      async.waterfall(b, function(err, result) {
-        for(var i = 0, j = 0; i < data.length; i++) {
-          data[i].number = i + 1;
-          //data[i].answers = answ[i];
-          if(data[i].type == 'text' || data[i].type == 'textarea')
-            data[i].result = '';
-          else
-            data[i].answers = answ[j++];
-          if(data[i].type == 'radio')
-            data[i].result = '';
+          b.push(function(k, callback) {
+            query('SELECT SUM(uata.points) AS s FROM users_answers_textarea uata LEFT JOIN questions q ON q.id = uata.question_id AND q.test_id = ' + data[k].id, function(answers) {
+              if(answers[0].s && parseInt(answers[0].s))
+                data[k].sum += parseInt(answers[0].s);
+              callback(undefined);
+            }
+          )}.bind(this, i));
+          b.push(function(k, callback) {
+            query('SELECT SUM(answ.points) AS s FROM answers answ LEFT JOIN questions q ON q.id = answ.question_id AND q.test_id = ' + data[k].id + ' INNER JOIN users_answers_radio_checkbox uarch ON answ.id = uarch.answer_id', function(answers) {
+              if(answers[0].s && parseInt(answers[0].s))
+                data[k].sum += parseInt(answers[0].s);
+              callback(undefined);
+            }
+          )}.bind(this, i));
         }
+      }
+      async.waterfall(b, function(err, result) {
+        //console.log(data);
         res.json({data : data});
       });
-      res.json({data : data});
+      //res.json({data : data});
     });
   })
   .get('/questions/:test', function(req, res) {
@@ -97,7 +102,7 @@ app.use(express.json())
             data[i].answers = answ[j++];
           if(data[i].type == 'radio')
             data[i].result = '';
-        }
+        } 
         res.json({data : data});
       });
     });

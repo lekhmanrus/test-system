@@ -1,1 +1,14 @@
-Edit User Partial
+<title>Edit user</title>
+<div class="page-header">
+  <h1><span>Edit</span>&nbsp;<small>user</small></h1>
+</div>
+<h4>
+  <ol class="breadcrumb"><i class="glyphicon glyphicon-check"></i>&nbsp;
+    <li class="active" l10n-text="main.test"></li>
+  </ol>
+</h4>
+<hr>
+<div ng-if="categories.length <= 0">Categories not found.</div>
+<div ng-if="categories.length > 0" class="list-group">
+  <a ng-repeat="category in categories | filter : {title : search.q}" href="#/category/{{category.id}}" class="list-group-item">{{category.title}}</a>
+</div>

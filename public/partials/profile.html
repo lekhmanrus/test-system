@@ -1,0 +1,25 @@
+<title>Profile {{profile.login}}</title>
+<div class="page-header">
+  <h1><span ng-bind="profile.login"></span>&nbsp;<small><a ng-if="profile.id == $parent.user.id" href="#/settings"><span class="label label-primary">Primary</span></a></small></h1>
+</div>
+<table class="table table-hover">
+  <tr>
+    <th colspan="2">Information about user</th>
+  </tr>
+  <tr>
+    <td>Surname</td>
+    <td ng-bind="profile.surname"></td>
+  </tr>
+  <tr>
+    <td>Name</td>
+    <td ng-bind="profile.name"></td>
+  </tr>
+  <tr>
+    <td>Patronymic</td>
+    <td ng-bind="profile.patronymic"></td>
+  </tr>
+  <tr>
+    <td>E-mail</td>
+    <td ng-bind="profile.email"></td>
+  </tr>
+</table>

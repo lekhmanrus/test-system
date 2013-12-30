@@ -418,6 +418,19 @@ angular.module('test.controllers', [])
   .controller('deleteRightsCtrl', ['$scope', 'l10n', function($scope, l10n) {
     l10n.setLocale($scope.$parent.language.locale);
   }])
+  .controller('profileCtrl', ['$scope', 'l10n', '$http', 'toaster', '$routeParams', function($scope, l10n, $http, toaster, $routeParams) {
+    l10n.setLocale($scope.$parent.language.locale);
+    $http.post("/profile", {id : $routeParams.uid})
+      .then(function(data) {
+        if(data.data.success)
+          $scope.profile = data.data.data;
+        else
+          toaster.pop('error', l10n.get('main.error'), l10n.get('main.error-attempt'));
+      },
+      function() {
+        toaster.pop('error', l10n.get('main.error'), l10n.get('main.error-attempt'));
+      });
+  }])
   .controller('404Ctrl', ['$scope', 'l10n', function($scope, l10n) {
     l10n.setLocale($scope.$parent.language.locale);
   }]);

@@ -204,5 +204,15 @@ app.use(express.json())
       });
     });
   })
+  .post('/profile', function(req, res) {
+    query("SELECT * FROM users WHERE id = '" + req.body.id + "' LIMIT 1;", function(data) {
+      if(data.length <= 0) {
+        res.json({success : false});
+        return;
+      }
+      else
+        res.json({success : true, data : data[0]});
+    });
+  })
   .use(express.static(__dirname + '/public'))
   .listen(process.env.PORT || 8888);

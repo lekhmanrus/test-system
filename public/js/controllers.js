@@ -221,9 +221,48 @@ angular.module('test.controllers', [])
     $.get("/questions/" +  $scope.test, function(data) {
       $timeout(function() {
         $scope.questions = data.data;
+        for(var i = 0; i < $scope.questions.length; i++)
+          $scope.questions[i].answered = false;
         $scope.$parent.loading = false;
       });
     });
+    $scope.valueNow = 0;
+    $scope.answered = 0;
+    $scope.change = function(qid) {
+      var qpos = 0;
+      for(var i = 0; i < $scope.questions.length; i++)
+        if($scope.questions[i].id == qid) {
+          qpos = i;
+          break;
+        }
+      if($scope.questions[qpos].type == 'checkbox') {
+        var flag = false;
+        for(var i = 0; i < $scope.questions[qpos].answers.length; i++)
+          if($scope.questions[qpos].answers[i].result) {
+            flag = true;
+            break;
+          }
+        if(flag)
+          $scope.questions[qpos].answered = true;
+        else
+          $scope.questions[qpos].answered = false;
+      }
+      else {
+        if($scope.questions[qpos].result && $scope.questions[qpos].result.length > 0)
+          $scope.questions[qpos].answered = true;
+        else
+          $scope.questions[qpos].answered = false;
+      }
+      $scope.answered = 0;
+      for(var i = 0; i < $scope.questions.length; i++)
+        if($scope.questions[i].answered)
+          $scope.answered++;
+      $scope.valueNow = $scope.answered / $scope.questions.length * 100;
+      if($scope.valueNow > 100)
+        $scope.valueNow = 100;
+      if($scope.valueNow < 0)
+        $scope.valueNow = 0;
+    }
   }])
   .controller('addUserCtrl', ['$scope', 'l10n', function($scope, l10n) {
     l10n.setLocale($scope.$parent.language.locale);

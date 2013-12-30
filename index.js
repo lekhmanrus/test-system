@@ -46,12 +46,13 @@ app.use(express.json())
       var answ = [];
       var rslt = [];
       for(var i = 0; i < data.length; i++)
-        if(data[i].type == 'radio' || data[i].type == 'checkbox')
+        if(data[i].type == 'checkbox' || data[i].type == 'radio')
           b.push(function(k, callback) {
             query('SELECT * FROM "answers" WHERE "question_id" = ' + data[k].id + ' ORDER BY "order", "id";', function(answers) {
               for(var j = 0; j < answers.length; j++) {
                 delete answers[j].points;
-                answers[j].result = false;
+                if(data[k].type == 'checkbox')
+                  answers[j].result = false;
               }
               answ.push(answers);
               callback(undefined);
@@ -65,6 +66,8 @@ app.use(express.json())
             data[i].result = '';
           else
             data[i].answers = answ[j++];
+          if(data[i].type == 'radio')
+            data[i].result = '';
         }
         res.json({data : data});
       });

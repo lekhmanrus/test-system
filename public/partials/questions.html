@@ -1,13 +1,21 @@
 <tabset>
   <tab ng-repeat="question in questions" heading="{{question.number}}">
     <h3>{{question.number}}. {{question.title}}</h3>
-    <div ng-repeat="answer in question.answers" ng-if="question.type == 'radio' || question.type == 'checkbox'" class="{{question.type}}">
+    <div ng-repeat="answer in question.answers" ng-if="question.type == 'checkbox'" class="{{question.type}}">
       <label>
-        <input ng-model="answer.result" name="q{{question.id}}" type="{{question.type}}" />{{answer.title}}
+        <input ng-model="answer.result" ng-change="change(question.id)" name="q{{question.id}}" type="{{question.type}}" />{{answer.title}}
       </label>
     </div>
-    <input ng-model="question.result" ng-if="question.type == 'text'" name="q{{question.id}}" class="form-control" type="text" placeholder="Write your answer there" />
-    <textarea ng-model="question.result" rows="7" ng-if="question.type == 'textarea'" name="q{{question.id}}" class="form-control" placeholder="Write your answer there"></textarea>
+    <div ng-repeat="answer in question.answers" ng-if="question.type == 'radio'" class="{{question.type}}">
+      <label>
+        <input ng-model="question.result" ng-change="change(question.id)" name="q{{question.id}}" value="{{answer.id}}" type="{{question.type}}" />{{answer.title}}
+      </label>
+    </div>
+    <input ng-model="question.result" ng-change="change(question.id)" ng-if="question.type == 'text'" name="q{{question.id}}" class="form-control" type="{{question.type}}" placeholder="Write your answer there" />
+    <textarea ng-model="question.result" ng-change="change(question.id)" rows="7" ng-if="question.type == 'textarea'" name="q{{question.id}}" class="form-control" placeholder="Write your answer there"></textarea>
   </tab>
   <tab ng-if="" heading="ee">d</tab>
 </tabset>
+<div class="clearfix"></div>
+<br />
+<progressbar max="100" value="valueNow"><span style="white-space: nowrap;">{{answered}} / {{questions.length}} ({{valueNow}}%)</span></progressbar>

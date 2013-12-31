@@ -213,7 +213,6 @@ angular.module('test.controllers', [])
     $scope.test = $routeParams.test;
     $scope.enabled = false;
     $scope.questions = [];
-
     $.get("/istestenabled/" +  $scope.test + "/" +  $scope.$parent.user.id, function(data) {
       $timeout(function() {
         $scope.enabled = data.enabled;
@@ -361,7 +360,16 @@ angular.module('test.controllers', [])
           }
         }
         else
-          alert(1);///////////////
+          $.get("/markoftest/" + $routeParams.test, function(data) {
+            $timeout(function() {
+              $scope.result = data;
+              if($scope.result.sum < 0)
+                $scope.result.sum = 0;
+              else if($scope.result.sum > $scope.result.max)
+                $scope.result.sum = $scope.result.max;
+              $scope.$parent.loading = false;
+            });
+          });
       });
     });
   }])

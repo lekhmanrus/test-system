@@ -32,5 +32,16 @@
   </div>
 </div>
 <div ng-if="!enabled">
-
+  <div class="page-header">
+    <h1><span>Test</span>&nbsp;<small>passed</small></h1>
+  </div>
+  <progressbar ng-if="result.sum / result.max * 100 <= 25" type="danger" max="100" value="result.sum / result.max * 100">
+    <span style="white-space: nowrap;">{{result.sum}} / {{result.max}} ({{result.sum / result.max * 100 | number : 2}}%)</span>
+  </progressbar>
+  <progressbar ng-if="result.sum / result.max * 100 > 25 && result.sum / result.max * 100 <= 75" type="warning" max="100" value="result.sum / result.max * 100">
+    <span style="white-space: nowrap;">{{result.sum}} / {{result.max}} ({{result.sum / result.max * 100 | number : 2}}%)</span>
+  </progressbar>
+  <progressbar ng-if="result.sum / result.max * 100 > 75" type="success" max="100" value="result.sum / result.max * 100">
+    <span style="white-space: nowrap;">{{result.sum}} / {{result.max}} ({{result.sum / result.max * 100 | number : 2}}%)</span>
+  </progressbar>
 </div>

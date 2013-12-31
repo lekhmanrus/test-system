@@ -72,6 +72,17 @@ app.use(express.json())
       });
     });
   })
+  .get('/markoftest/:test', function(req, res) {
+    query('SELECT SUM(uat.points) AS s FROM users_answers_text uat LEFT JOIN questions q ON q.id = uat.question_id AND q.test_id = ' + req.params.test, function(s1) {
+      query('SELECT SUM(uata.points) AS s FROM users_answers_textarea uata LEFT JOIN questions q ON q.id = uata.question_id AND q.test_id = ' + req.params.test, function(s2) {
+        query('SELECT SUM(answ.points) AS s FROM answers answ LEFT JOIN questions q ON q.id = answ.question_id AND q.test_id = ' + req.params.test + ' INNER JOIN users_answers_radio_checkbox uarch ON answ.id = uarch.answer_id', function(s3) {
+          query('SELECT SUM(max_points) max FROM  questions WHERE test_id = ' + req.params.test, function(max) {
+            res.json({sum : parseInt(s1[0].s) + parseInt(s2[0].s) + parseInt(s3[0].s), max : max[0].max});
+          });
+        });
+      });
+    });
+  })
   .get('/questions/:test', function(req, res) {
     query('SELECT * FROM "questions" WHERE "test_id" = ' + req.params.test + ' ORDER BY "order", "id";', function(data) {
       var b = [];

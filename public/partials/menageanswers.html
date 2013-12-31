@@ -1,1 +1,18 @@
-Menage Answers Partial
+<title>Contact</title>
+<div class="page-header">
+  <h1>Перевірка <small>відповідей</small></h1>
+</div>
+<div ng-if="answers.length <= 0">Unchecked answers not found.</div>
+  <div ng-if="answers.length > 0">
+<div ng-repeat="answer in answers">
+  <h3 ng-bind="answer.title"></h3>
+  <p ng-bind="answer.answer"></p>
+  <div class="input-group">
+    <span class="input-group-addon">Maximal points: {{answer.max_points}}</span>
+    <input type="number" ng-model="answer.points" class="form-control" placeholder="Mark this answer please" required />
+    <span class="input-group-btn">
+      <button class="btn btn-default" ng-click="mark(answer.id)" type="button">Mark it!</button>
+    </span>
+  </div>
+  <hr />
+</div>

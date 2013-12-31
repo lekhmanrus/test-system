@@ -414,8 +414,43 @@ angular.module('test.controllers', [])
   .controller('deleteUserCtrl', ['$scope', 'l10n', function($scope, l10n) {
     l10n.setLocale($scope.$parent.language.locale);
   }])
-  .controller('menageAnswersCtrl', ['$scope', 'l10n', function($scope, l10n) {
+  .controller('menageAnswersCtrl', ['$scope', '$timeout', 'l10n', '$http', 'toaster', function($scope, $timeout, l10n, $http, toaster) {
     l10n.setLocale($scope.$parent.language.locale);
+    $scope.answers = [];
+    $.get("/uncheckedanswers", function(data) {
+      $timeout(function() {
+        $scope.answers = data.data;
+        console.log($scope.answers);
+      });
+    });
+    $scope.mark = function(aid) {
+      var apos = 0;
+      for(var i = 0; i < $scope.answers.length; i++)
+        if($scope.answers[i].id == aid) {
+          apos = i;
+          break;
+        }
+      if(parseInt($scope.answers[i].points) > $scope.answers[i].max_points)
+        $scope.answers[i].points = $scope.answers[i].max_points;
+      $http.post("/markanswer", {
+        id : $scope.answers[apos].id,
+        table : $scope.answers[apos].table,
+        points : $scope.answers[apos].points
+      })
+        .then(function(data) {
+          if(data.data.success) {
+            toaster.pop('success', "Успішно", "Відпоідь оцінена.");
+            location.reload();
+          }
+          else
+            toaster.pop('error', l10n.get('registration.error'), "Сталася помилка. Повторіть спробу пізніше.");
+          $scope.$parent.loading = false;
+        },
+        function() {
+          toaster.pop('error', l10n.get('registration.error'), l10n.get('registration.error-attempt'));
+          $scope.$parent.loading = false;
+        });
+    }
   }])
   .controller('menageQuestionsCtrl', ['$scope', 'l10n', function($scope, l10n) {
     l10n.setLocale($scope.$parent.language.locale);

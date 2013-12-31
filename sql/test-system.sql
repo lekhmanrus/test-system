@@ -32,24 +32,19 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 -- Records of answers
 -- ----------------------------
-INSERT INTO "public"."answers" ("question_id", "title", "points", "order") VALUES ('1', '1 ans', '-2', '0');
-INSERT INTO "public"."answers" ("question_id", "title", "points", "order") VALUES ('1', '2 ans', '-1', '10');
-INSERT INTO "public"."answers" ("question_id", "title", "points", "order") VALUES ('1', '3 ans', '0', '20');
-INSERT INTO "public"."answers" ("question_id", "title", "points", "order") VALUES ('1', '4 ans', '1', '30');
-INSERT INTO "public"."answers" ("question_id", "title", "points", "order") VALUES ('1', '5 ans', '2', '40');
-INSERT INTO "public"."answers" ("question_id", "title", "points", "order") VALUES ('2', '1 ans', '-2', '0');
-INSERT INTO "public"."answers" ("question_id", "title", "points", "order") VALUES ('2', '2 ans', '-1', '10');
-INSERT INTO "public"."answers" ("question_id", "title", "points", "order") VALUES ('2', '3 ans', '0', '20');
-INSERT INTO "public"."answers" ("question_id", "title", "points", "order") VALUES ('2', '4 ans', '1', '30');
-INSERT INTO "public"."answers" ("question_id", "title", "points", "order") VALUES ('2', '5 ans', '2', '40');
-INSERT INTO "public"."answers" ("question_id", "title", "points", "order") VALUES ('3', '1 ans', '0', '20');
-INSERT INTO "public"."answers" ("question_id", "title", "points", "order") VALUES ('3', '2 ans', '1', '30');
-INSERT INTO "public"."answers" ("question_id", "title", "points", "order") VALUES ('3', '3 ans', '2', '40');
-INSERT INTO "public"."answers" ("question_id", "title", "points", "order") VALUES ('4', '1 ans', '0', '20');
-INSERT INTO "public"."answers" ("question_id", "title", "points", "order") VALUES ('4', '2 ans', '1', '30');
-INSERT INTO "public"."answers" ("question_id", "title", "points", "order") VALUES ('4', '3 ans', '2', '40');
-INSERT INTO "public"."answers" ("question_id", "title", "points", "order") VALUES ('5', '1 ans', '1', '30');
-INSERT INTO "public"."answers" ("question_id", "title", "points", "order") VALUES ('5', '2 ans', '2', '40');
+INSERT INTO "public"."answers" ("question_id", "title", "points", "order") VALUES ('1', 'Австралія', '0', '0');
+INSERT INTO "public"."answers" ("question_id", "title", "points", "order") VALUES ('1', 'США', '0', '10');
+INSERT INTO "public"."answers" ("question_id", "title", "points", "order") VALUES ('1', 'Китай', '0', '20');
+INSERT INTO "public"."answers" ("question_id", "title", "points", "order") VALUES ('1', 'Франція', '3', '30');
+INSERT INTO "public"."answers" ("question_id", "title", "points", "order") VALUES ('1', 'Італія', '3', '40');
+INSERT INTO "public"."answers" ("question_id", "title", "points", "order") VALUES ('2', 'Київ', '3', '0');
+INSERT INTO "public"."answers" ("question_id", "title", "points", "order") VALUES ('2', 'Запоріжжя', '0', '10');
+INSERT INTO "public"."answers" ("question_id", "title", "points", "order") VALUES ('2', 'Львів', '0', '20');
+INSERT INTO "public"."answers" ("question_id", "title", "points", "order") VALUES ('2', 'Одеса', '0', '30');
+INSERT INTO "public"."answers" ("question_id", "title", "points", "order") VALUES ('2', 'Харків', '0', '40');
+INSERT INTO "public"."answers" ("question_id", "title", "points", "order") VALUES ('5', 'Токіо - столиця Японії', '3', '30');
+INSERT INTO "public"."answers" ("question_id", "title", "points", "order") VALUES ('5', 'Вашингтон - столиця США', '3', '40');
+INSERT INTO "public"."answers" ("question_id", "title", "points", "order") VALUES ('5', 'Київ - столиця Россії', '0', '50');
 
 -- ----------------------------
 -- Table structure for categories
@@ -92,11 +87,11 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 -- Records of questions
 -- ----------------------------
-INSERT INTO "public"."questions" ("test_id", "title", "type", "order", "max_points") VALUES ('1', 'Оберіть країни Європи', 'checkbox', '0', '3');
-INSERT INTO "public"."questions" ("test_id", "title", "type", "order", "max_points") VALUES ('1', 'Оберіть місто, столицю України', 'radio', '10', '2');
+INSERT INTO "public"."questions" ("test_id", "title", "type", "order", "max_points") VALUES ('1', 'Оберіть країни Європи', 'checkbox', '0', '6');
+INSERT INTO "public"."questions" ("test_id", "title", "type", "order", "max_points") VALUES ('1', 'Оберіть місто, столицю України', 'radio', '10', '3');
 INSERT INTO "public"."questions" ("test_id", "title", "type", "order", "max_points") VALUES ('1', 'Перелікуйте країни Азії', 'text', '20', '5');
 INSERT INTO "public"."questions" ("test_id", "title", "type", "order", "max_points") VALUES ('1', 'Перелікуйте 5 найбільших за населенням міст світу', 'textarea', '30', '10');
-INSERT INTO "public"."questions" ("test_id", "title", "type", "order", "max_points") VALUES ('1', 'Оберіть правильні твердження', 'checkbox', '40', '3');
+INSERT INTO "public"."questions" ("test_id", "title", "type", "order", "max_points") VALUES ('1', 'Оберіть правильні твердження', 'checkbox', '40', '6');
 
 -- ----------------------------
 -- Table structure for results
@@ -108,7 +103,7 @@ CREATE TABLE "public"."results" (
 "test_id" int4,
 "points" int4
 )
-WIT H(OIDS=FALSE)
+WITH(OIDS=FALSE)
 
 ;
 
@@ -183,7 +178,7 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 -- Records of subcategories
 -- ----------------------------
-INSERT INTO "public"."subcategories" ("category_id", "title", "order") VALUES ('1', 'Основи алгоритмізації', '0');
+INSERT INTO "public"."subcategories" ("category_id", "title", "order") VALUES ('1', 'Географія', '0');
 INSERT INTO "public"."subcategories" ("category_id", "title", "order") VALUES ('1', 'Лінійна алгебра', '10');
 INSERT INTO "public"."subcategories" ("category_id", "title", "order") VALUES ('1', 'Групова динаміка', '20');
 
@@ -294,6 +289,7 @@ CREATE TABLE "public"."users_answers_text" (
 "id" SERIAL NOT NULL,
 "user_id" int4 NOT NULL,
 "question_id" int4 NOT NULL,
+"checked" bool DEFAULT false NOT NULL,
 "points" int2 DEFAULT 0 NOT NULL,
 "answer" varchar(255) COLLATE "default"
 )
@@ -313,6 +309,7 @@ CREATE TABLE "public"."users_answers_textarea" (
 "id" SERIAL NOT NULL,
 "user_id" int4 NOT NULL,
 "question_id" int4 NOT NULL,
+"checked" bool DEFAULT false NOT NULL,
 "points" int2 DEFAULT 0 NOT NULL,
 "answer" text COLLATE "default"
 )

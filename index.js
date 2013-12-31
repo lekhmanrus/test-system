@@ -120,8 +120,25 @@ app.use(express.json())
       res.json({enabled : data[0].enabled});
     });
   })
+  .get('/uncheckedanswers', function(req, res) {
+    query("SELECT uat.id, uat.answer, q.title, q.max_points, 'users_answers_text' AS table, 0 points FROM questions q LEFT JOIN users_answers_text uat ON uat.question_id = q.id WHERE uat.checked = 'f';", function(uat) {
+      query("SELECT uata.id, uata.answer, q.title, q.max_points, 'users_answers_textarea' AS table, 0 points FROM questions q LEFT JOIN users_answers_textarea uata ON uata.question_id = q.id WHERE uata.checked = 'f';", function(uata) {
+        var data = new Array(uat.length + uata.length);
+        for(var i = 0; i < uat.length; i++)
+          data[i] = uat[i];
+        for(var i = 0; i < uata.length; i++)
+          data[i + uat.length] = uata[i];
+        res.json({data : data});
+      });
+    });
+  })
   .post('/sendanswersradiocheckbox', function(req, res) {
     query("INSERT INTO users_answers_radio_checkbox (user_id, question_id, answer_id) VALUES ('" + req.body.uid + "', '" + req.body.qid + "', '" + req.body.aid + "');", function(data) {
+      res.json({success : true});
+    });
+  })
+  .post('/markanswer', function(req, res) {
+    query("UPDATE " + req.body.table + " SET points = '" + req.body.points + "', checked = 't' WHERE id = '" + req.body.id + "';", function(data) {
       res.json({success : true});
     });
   })

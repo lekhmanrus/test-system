@@ -1,0 +1,64 @@
+<title>Settings</title>
+<div class="page-header">
+  <h1><span>My</span>&nbsp;<small>settings</small></h1>
+</div>
+<form class="form-horizontal" role="form">
+  <div class="form-group">
+    <label for="input-email" class="col-xs-3 control-label" l10n-text="registration.e-mail"></label>
+    <div class="col-xs-9">
+      <input type="email" ng-model="profile.email" class="form-control" id="input-email" l10n-placeholder="registration.e-mail-help" />
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="input-name" class="col-xs-3 control-label" l10n-text="registration.name"></label>
+    <div class="col-xs-9">
+      <input type="text" ng-model="profile.name" class="form-control" id="input-name" l10n-placeholder="registration.name-help" />
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="input-surname" class="col-xs-3 control-label" l10n-text="registration.surname"></label>
+    <div class="col-xs-9">
+      <input type="text" ng-model="profile.surname" class="form-control" id="input-surname" l10n-placeholder="registration.surname-help" />
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="input-patronymic" class="col-xs-3 control-label" l10n-text="registration.patronymic"></label>
+    <div class="col-xs-9">
+      <input type="text" ng-model="profile.patronymic" class="form-control" id="input-patronymic" l10n-placeholder="registration.patronymic-help" />
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-xs-offset-3 btn-group col-xs-9">
+      <button type="button" class="btn btn-primary" ng-model="changePassword" btn-radio="true">YES</button>
+      <button type="button" class="btn btn-primary" ng-model="changePassword" btn-radio="false">NO</button>
+      &nbsp;
+      <label class="control-label">Change password?</label>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="input-password" class="col-xs-3 control-label" l10n-text="registration.pass"></label>
+    <div class="col-xs-9">
+      <input type="password" ng-model="password" class="form-control" id="input-password" l10n-placeholder="registration.pass-help" />
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="input-new-password" class="col-xs-3 control-label">New password</label>
+    <div class="col-xs-9">
+      <input type="password" ng-model="newPassword" class="form-control" id="input-new-password" placeholder="Write new password there" />
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="input-confirm-password" class="col-xs-3 control-label">Confirm</label>
+    <div class="col-xs-9">
+      <input type="password" ng-model="confirmNewPassword" class="form-control" id="input-confirm-password" placeholder="You need confirm it there" />
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-xs-offset-3 col-xs-4">
+      <button type="reset" class="btn btn-lg btn-default btn-block">Reset</button>
+    </div>
+    <div class="col-xs-5">
+      <button type="submit" class="btn btn-lg btn-primary btn-block" ng-click="save()">Save</button>
+    </div>
+  </div>
+</form>

@@ -214,5 +214,33 @@ app.use(express.json())
         res.json({success : true, data : data[0]});
     });
   })
+  .post('/saveprofilepw', function(req, res) {
+    query("SELECT * FROM users WHERE id = '" + req.body.id + "' AND password = '" + req.body.password + "' LIMIT 1;", function(data) {
+      if(data.length != 1) {
+        res.json({success : false});
+        return;
+      }
+      query("UPDATE users SET password = '" + req.body.newPassword + "', email = '" + req.body.email + "', name = '" + req.body.name + "', surname = '" + req.body.surname + "', patronymic = '" + req.body.patronymic + "' WHERE id = '" + req.body.id + "' AND password = '" + req.body.password + "';", function(data) {
+          query("SELECT * FROM users WHERE id = '" + req.body.id + "' AND password = '" + req.body.newPassword + "' LIMIT 1;", function(data) {
+            delete data[0].password;
+            res.json({success : true, data : data[0]});
+          });
+      });
+    });
+  })
+  .post('/saveprofile', function(req, res) {
+    query("SELECT * FROM users WHERE id = '" + req.body.id + "' LIMIT 1;", function(data) {
+      if(data.length != 1) {
+        res.json({success : false});
+        return;
+      }
+      query("UPDATE users SET email = '" + req.body.email + "', name = '" + req.body.name + "', surname = '" + req.body.surname + "', patronymic = '" + req.body.patronymic + "' WHERE id = '" + req.body.id + "';", function(data) {
+          query("SELECT * FROM users WHERE id = '" + req.body.id + "' LIMIT 1;", function(data) {
+            delete data[0].password;
+            res.json({success : true, data : data[0]});
+          });
+      });
+    });
+  })
   .use(express.static(__dirname + '/public'))
   .listen(process.env.PORT || 8888);

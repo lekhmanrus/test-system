@@ -431,6 +431,88 @@ angular.module('test.controllers', [])
         toaster.pop('error', l10n.get('main.error'), l10n.get('main.error-attempt'));
       });
   }])
+  .controller('settingsCtrl', ['$scope', 'l10n', '$http', 'toaster', '$routeParams', '$location', function($scope, l10n, $http, toaster, $routeParams, $location) {
+    l10n.setLocale($scope.$parent.language.locale);
+    $scope.changePassword = false;
+    $http.post("/profile", {id : $scope.$parent.user.id})
+      .then(function(data) {
+        if(data.data.success)
+          $scope.profile = data.data.data;
+        else
+          toaster.pop('error', l10n.get('main.error'), l10n.get('main.error-attempt'));
+      },
+      function() {
+        toaster.pop('error', l10n.get('main.error'), l10n.get('main.error-attempt'));
+      });
+    $scope.save = function() {
+      $scope.$parent.loading = true;
+      if($scope.profile.email == undefined || !$scope.profile.email) {
+        toaster.pop('warning', l10n.get('registration.error'), l10n.get('registration.error-email'));
+        $scope.$parent.loading = false;
+        return;
+      }
+      if($scope.changePassword) {
+        $scope.$parent.loading = true;
+        if($scope.newPassword != $scope.confirmNewPassword) {
+          toaster.pop('warning', l10n.get('registration.error'), l10n.get('registration.error-pass-repeat'));
+          $scope.$parent.loading = false;
+          return;
+        }
+        if($scope.newPassword.length < 6) {
+          toaster.pop('warning', l10n.get('registration.error'), l10n.get('registration.error-pass-lenght'));
+          $scope.$parent.loading = false;
+          return;
+        }
+        $http.post("/saveprofilepw", {
+          id : $scope.$parent.user.id,
+          email : $scope.profile.email,
+          name : $scope.profile.name,
+          surname : $scope.profile.surname,
+          patronymic : $scope.profile.patronymic,
+          password : $scope.password,
+          newPassword : $scope.newPassword
+        })
+          .then(function(data) {
+            if(data.data.success) {
+              toaster.pop('success', "Успішно", "Ваш профіль успішно відредаговано.");
+              sessionStorage['user'] = JSON.stringify(data.data.data);
+              $location.path('/profile/' + $scope.$parent.user.id);
+              //location.reload();
+            }
+            else
+              toaster.pop('error', l10n.get('main.error'), l10n.get('main.error-attempt'));
+            $scope.$parent.loading = false;
+          },
+          function() {
+            toaster.pop('error', l10n.get('main.error'), l10n.get('main.error-attempt'));
+            $scope.$parent.loading = false;
+          });
+      }
+      else
+        $http.post("/saveprofile", {
+          id : $scope.$parent.user.id,
+          email : $scope.profile.email,
+          name : $scope.profile.name,
+          surname : $scope.profile.surname,
+          patronymic : $scope.profile.patronymic
+        })
+          .then(function(data) {
+            if(data.data.success) {
+              toaster.pop('success', "Успішно", "Ваш профіль успішно відредаговано.");
+              sessionStorage['user'] = JSON.stringify(data.data.data);
+              $location.path('/profile/' + $scope.$parent.user.id);
+              //location.reload();
+            }
+            else
+              toaster.pop('error', l10n.get('main.error'), l10n.get('main.error-attempt'));
+            $scope.$parent.loading = false;
+          },
+          function() {
+            toaster.pop('error', l10n.get('main.error'), l10n.get('main.error-attempt'));
+            $scope.$parent.loading = false;
+          });
+    }
+  }])
   .controller('404Ctrl', ['$scope', 'l10n', function($scope, l10n) {
     l10n.setLocale($scope.$parent.language.locale);
   }]);

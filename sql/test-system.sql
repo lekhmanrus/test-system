@@ -96,7 +96,7 @@ INSERT INTO "public"."questions" ("test_id", "title", "type", "order", "max_poin
 INSERT INTO "public"."questions" ("test_id", "title", "type", "order", "max_points") VALUES ('1', '2 question', 'radio', '10', '2');
 INSERT INTO "public"."questions" ("test_id", "title", "type", "order", "max_points") VALUES ('1', '3 question', 'text', '20', '5');
 INSERT INTO "public"."questions" ("test_id", "title", "type", "order", "max_points") VALUES ('1', '4 question', 'textarea', '30', '10');
-INSERT INTO "public"."questions" ("test_id", "title", "type", "order", "max_points") VALUES ('1', '5 question', 'checkbox', '40', '2');
+INSERT INTO "public"."questions" ("test_id", "title", "type", "order", "max_points") VALUES ('1', '5 question', 'checkbox', '40', '3');
 
 -- ----------------------------
 -- Table structure for results
